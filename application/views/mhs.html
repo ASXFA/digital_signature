@@ -1,0 +1,159 @@
+{% extends "template/layout.html" %}
+{% block content %}
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">{{page}}</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="dashboard">Home</a></li>
+                    <li class="breadcrumb-item active">{{page}}</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <!-- Info boxes -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="d-inline">
+                            List Data User
+                            <span class="float-right">
+                                <button class="btn btn-primary btn-sm " id="btn-tambah"> <i
+                                        class="fa fa-plus-circle"></i> Tambah
+                                    Data</button>
+                                <a href="viewHapusMhs" class="btn btn-warning btn-sm "> <i class="fa fa-recycle"></i>
+                                    List Hapus Sementara</a>
+                            </span>
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <table id="table-mhs" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>ID</th>
+                                    <th>Nama</th>
+                                    <th>NPM</th>
+                                    <th>PRODI</th>
+                                    <th>No Hp</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/. container-fluid -->
+</section>
+
+<!-- modal -->
+<!-- Modal -->
+<div class="modal fade" id="modals" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark rounded">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-modal" method="post">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="" class="form-control-label">Nama</label>
+                                <input type="text" class="form-control" id="nama_mhs" name="nama_mhs" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="form-control-label">Prodi</label>
+                                <input type="text" class="form-control" id="prodi_mhs" name="prodi_mhs" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="" class="form-control-label">NPM</label>
+                                <input type="text" class="form-control" id="npm_mhs" name="npm_mhs" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="form-control-label">No Hp</label>
+                                <input type="text" class="form-control" id="no_hp_mhs" name="no_hp_mhs" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="" class="form-control-label">Email</label>
+                                <input type="text" class="form-control" id="email_akun" name="email_akun" required>
+                                <div class="invalid-feedback">
+                                    Mohon masukan email yang valid !
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="form-control-label">Level Akun</label>
+                                <select name="level_akun" id="level_akun" class="form-control" required>
+                                    {% for item in level %}
+                                    {% if item.id_level == 3 %}
+                                    <option value="{{item.id_level}}">{{item.nama_level}}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <small><em>* Menambah mahasiswa sekaligus membuat akun untuk mahasiswa yang
+                                    ditambahkan</em></small>
+                        </div>
+                        <div class="col-md-12">
+                            <small><em>* Password akun default adalah <b>Email</b> yang didaftarkan</em></small>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <input type="text" id="operation" name="operation" hidden>
+                <input type="text" id="id_mhs" name="id_mhs" value="{{kode}}" hidden>
+                <button type="submit" class="btn btn-secondary" id="form-btn">submit</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Detail-->
+<div class="modal fade" id="modals-detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark rounded">
+                <h5 class="modal-title" id="exampleModalLabelDetail"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="text-white" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive" id="table-detail">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /.content -->
+{% endblock %}
+{% block js %}
+<script src="{{base_url}}assets/action/mhs.js"></script>
+{% endblock %}
