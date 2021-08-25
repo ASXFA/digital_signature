@@ -61,4 +61,5 @@ $route['^(dashboard)(/:any)?$'] = 'Dashboard/$0';
 $route['^(listUser|userLists|doUser|userById|deleteUser|listHapus|viewHapus|restore|profilUser)(/:any)?$'] = 'User/$0';
 $route['^(listAkun|akunLists|akunById|getByEmail|editPassword)(/:any)?$'] = 'Akun/$0';
 $route['^(listMhs|mhsLists|doMhs|mhsById|deleteMhs|listHapusMhs|viewHapusMhs|restoreMhs|profilMhs)(/:any)?$'] = 'Mhs/$0';
-$route['^(listPengajuan|pengajuanLists|doPengajuan|pengajuanById|deletePengajuan|viewHapusPengajuan|listHapusPengajuan|restorePengajuan)(/:any)?$'] = 'Pengajuan/$0';
+$route['^(listPengajuan|pengajuanLists|doPengajuan|pengajuanById|deletePengajuan|viewHapusPengajuan|listHapusPengajuan|restorePengajuan|pengajuanDetailId)(/:any)?$'] = 'Pengajuan/$0';
+$route['^(sign)(/:any)?$'] = 'Signature/$0';

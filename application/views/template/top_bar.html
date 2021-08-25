@@ -136,7 +136,7 @@
                 </li> -->
                 {% if level_akun_login == 1 %}
                 <li class="nav-item">
-                    <a href="listUser" class="nav-link" id="user-page">
+                    <a href="{{base_url}}listUser" class="nav-link" id="user-page">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             User
@@ -144,7 +144,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="listAkun" class="nav-link" id="akun-page">
+                    <a href="{{base_url}}listAkun" class="nav-link" id="akun-page">
                         <i class="nav-icon fas fa-id-card"></i>
                         <p>
                             Akun
@@ -152,7 +152,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="listMhs" class="nav-link" id="mhs-page">
+                    <a href="{{base_url}}listMhs" class="nav-link" id="mhs-page">
                         <i class="nav-icon fas fa-user-circle"></i>
                         <p>
                             Mahasiswa
@@ -184,7 +184,7 @@
                 </li>
                 {% endif %}
                 <li class="nav-item">
-                    <a href="listPengajuan" class="nav-link" id="pengajuan-page">
+                    <a href="{{base_url}}listPengajuan" class="nav-link" id="pengajuan-page">
                         <i class="nav-icon fas fa-list-alt"></i>
                         <p>
                             Pengajuan
@@ -194,7 +194,7 @@
                 <li class="nav-header">PENGATURAN AKUN</li>
                 {% if level_akun_login != 3 %}
                 <li class="nav-item">
-                    <a href="profilUser" class="nav-link" id="profilUser-page">
+                    <a href="{{base_url}}profilUser" class="nav-link" id="profilUser-page">
                         <i class="nav-icon fas fa-user"></i>
                         <p>
                             Profil Saya
@@ -203,7 +203,7 @@
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a href="profilMhs" class="nav-link" id="profilMhs-page">
+                    <a href="{{base_url}}profilMhs" class="nav-link" id="profilMhs-page">
                         <i class="nav-icon fas fa-user"></i>
                         <p>
                             Profil Saya
@@ -212,7 +212,7 @@
                 </li>
                 {% endif %}
                 <li class="nav-item">
-                    <a href="logout" class="nav-link">
+                    <a href="{{base_url}}logout" class="nav-link">
                         <i class="nav-icon fa fa-map-signs"></i>
                         <p>
                             Keluar

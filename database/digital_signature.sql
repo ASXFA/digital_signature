@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 24, 2021 at 12:58 PM
+-- Generation Time: Aug 25, 2021 at 01:01 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.19
 
@@ -116,7 +116,17 @@ INSERT INTO `tbl_log` (`id_log`, `nama_aktor_log`, `aksi_log`, `tanggal_log`) VA
 (27, 'TEST', 'Hapus Sementara Pengaduan dengan ID 2', '2021-08-23 06:31:36'),
 (28, 'TEST', 'Hapus Sementara Pengaduan dengan ID 2', '2021-08-23 06:32:45'),
 (29, 'TEST', 'Hapus Sementara Pengaduan dengan ID 2', '2021-08-23 07:21:40'),
-(30, 'TEST', 'Restore Data Pengajuan dengan ID 2', '2021-08-23 07:33:37');
+(30, 'TEST', 'Restore Data Pengajuan dengan ID 2', '2021-08-23 07:33:37'),
+(31, 'mahasiswa', 'Mahasiswa denga ID MHS0001 Mengajukan berkas dengan perihal Tanda tangan kegiatan A', '2021-08-25 07:41:15'),
+(32, 'mahasiswa', 'Mahasiswa denga ID MHS0001 Mengajukan berkas dengan perihal Tanda tangan kegiatan A', '2021-08-25 09:09:15'),
+(33, 'mahasiswa', 'Mahasiswa denga ID MHS0001 Mengajukan berkas dengan perihal Tanda tangan kegiatan A', '2021-08-25 09:24:42'),
+(34, 'mahasiswa', 'Mahasiswa denga ID MHS0001 Mengajukan berkas dengan perihal Tanda tangan kegiatan A', '2021-08-25 09:28:46'),
+(35, 'mahasiswa', 'Mahasiswa denga ID MHS0001 Mengajukan berkas dengan perihal Tanda tangan kegiatan A', '2021-08-25 09:42:22'),
+(36, 'mahasiswa', 'Mahasiswa denga ID MHS0001 Mengajukan berkas dengan perihal Tanda tangan kegiatan A', '2021-08-25 09:53:49'),
+(37, 'mahasiswa', 'Mahasiswa denga ID MHS0001 Mengajukan berkas dengan perihal Tanda tangan kegiatan A', '2021-08-25 10:13:43'),
+(38, 'mahasiswa', 'Mahasiswa denga ID MHS0001 Mengajukan berkas dengan perihal Tanda tangan kegiatan A', '2021-08-25 10:33:14'),
+(39, 'mahasiswa', 'Mahasiswa denga ID MHS0001 Mengajukan berkas dengan perihal Tanda tangan kegiatan A', '2021-08-25 10:34:32'),
+(40, 'mahasiswa', 'Mahasiswa denga ID MHS0001 Mengajukan berkas dengan perihal Tanda Tangan kegiatan Seminar', '2021-08-25 12:40:55');
 
 -- --------------------------------------------------------
 
@@ -159,6 +169,8 @@ CREATE TABLE `tbl_pengajuan` (
   `tanggal_pengajuan` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `tanggal_selesai_pengajuan` datetime DEFAULT NULL,
   `nama_file_pengajuan` varchar(150) NOT NULL,
+  `private_key_pengajuan` varchar(150) NOT NULL,
+  `public_key_pengajuan` varchar(255) NOT NULL,
   `status_pengajuan` int(5) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` varchar(150) NOT NULL,
@@ -172,8 +184,9 @@ CREATE TABLE `tbl_pengajuan` (
 -- Dumping data for table `tbl_pengajuan`
 --
 
-INSERT INTO `tbl_pengajuan` (`id_pengajuan`, `id_mhs_pengajuan`, `perihal_pengajuan`, `deskripsi_pengajuan`, `tanggal_pengajuan`, `tanggal_selesai_pengajuan`, `nama_file_pengajuan`, `status_pengajuan`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
-(2, 'MHS0001', 'Tanda tangan kegiatan A', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting', '2021-08-22 17:07:49', NULL, 'hasil.pdf', 0, '2021-08-22 17:07:49', 'mahasiswa', NULL, NULL, NULL, NULL);
+INSERT INTO `tbl_pengajuan` (`id_pengajuan`, `id_mhs_pengajuan`, `perihal_pengajuan`, `deskripsi_pengajuan`, `tanggal_pengajuan`, `tanggal_selesai_pengajuan`, `nama_file_pengajuan`, `private_key_pengajuan`, `public_key_pengajuan`, `status_pengajuan`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
+(11, 'MHS0001', 'Tanda tangan kegiatan A', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', '2021-08-25 10:34:32', NULL, 'fpdf-sign-demo9.pdf', 'e80721793c24ae14edfca9b26ad406a9815cd3ff.pem', '61c9b2b17db77a27841bbeeabff923448b0f6388.pem', 0, '2021-08-25 10:34:32', 'mahasiswa', NULL, NULL, NULL, NULL),
+(12, 'MHS0001', 'Tanda Tangan kegiatan Seminar', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.', '2021-08-25 12:40:55', NULL, 'Document1.pdf', 'e80721793c24ae14edfca9b26ad406a9815cd3ff.pem', '61c9b2b17db77a27841bbeeabff923448b0f6388.pem', 0, '2021-08-25 12:40:55', 'mahasiswa', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -185,6 +198,8 @@ CREATE TABLE `tbl_pengajuan_detail` (
   `id_pengajuan_detail` int(5) NOT NULL,
   `id_pengajuan` int(5) NOT NULL,
   `id_pengesah` varchar(20) NOT NULL,
+  `digital_signature` text,
+  `qr_code` varchar(250) DEFAULT NULL,
   `status` int(5) NOT NULL DEFAULT '0',
   `deleted_at` datetime DEFAULT NULL,
   `deleted_by` varchar(150) DEFAULT NULL
@@ -194,9 +209,11 @@ CREATE TABLE `tbl_pengajuan_detail` (
 -- Dumping data for table `tbl_pengajuan_detail`
 --
 
-INSERT INTO `tbl_pengajuan_detail` (`id_pengajuan_detail`, `id_pengajuan`, `id_pengesah`, `status`, `deleted_at`, `deleted_by`) VALUES
-(6, 2, 'USR0002', 0, NULL, NULL),
-(7, 2, 'USR0003', 0, NULL, NULL);
+INSERT INTO `tbl_pengajuan_detail` (`id_pengajuan_detail`, `id_pengajuan`, `id_pengesah`, `digital_signature`, `qr_code`, `status`, `deleted_at`, `deleted_by`) VALUES
+(24, 11, 'USR0002', '?Lg???A?`~?[Q?v?F??????\0???j?<wDh?+J?;??R???>8^??{?w?\0[?j????*???|?$:)????C??OzZ$???4??`?o?A?????(?*??I???`??2@i??wm??o<???@2?s ???0F?*?M??=V?9h???????t?_??e%???~G\\8F;v?\r???????b???$??}?[???&%??W??j4?2?;?\n??@???@\'lS??8s', '185c7ea5a4c185be2721c7b5d4b859c01279e9b3.png', 1, NULL, NULL),
+(25, 12, 'USR0002', '??;Q???-?.?	??\\?u7?ž?{??S?|iBTY??\Z/d=?X?X?qN?$????\"?r???Wþ?+dp?z????yx}? z???\0,h??Q[??K??|????$9???aWW?????g??l3B??????i??qU?jQ?[?3i?vW?+???Tem?????YG??`????e8?<P??????>??3??a?H???????@??pY?z?i<z?1?X9?iZ??T;/\"	 ??4', '$2y$10$hfVw2MthkBFmmAEmE4l3D.D23OQrTBNwHJ2b34dUtklXOparFKdc..png', 1, NULL, NULL),
+(26, 12, 'USR0003', '???luo?ZMw?(<??R?Kf#??????J?\01}?|?S9?^?de???-?6?.??.iK??q???}o9????a\"C?HXA??\nz?}?\n)????2?,?Q\"/3o?\"1??@???}}?NY	|???????%?X~i`??????e?v\Z?%?2?aA????K>q3xF?\rix\r??/;C&v?!`?\0??{#?e0????5?????w?I???Z\r??`??:?Q2?Q??O?QN???-', '$2y$10$TkVP7kWKdT7OFxxbXazFiOSwvuLV8ImJ.1HnFx3rSo5A94l5bx5ee.png', 1, NULL, NULL),
+(27, 12, 'USR0004', '?f????e?B?|?????\"?}??I?`j?!?\0?2???{??IF??e?%\ZX??\'B???j?0?VJ?}~?3??\0?s?v: cB\n?X[???H(??{%*?5??:YgF?\0h?/]?c???3D=???LC????O!w??i@?fs?&B?????%??>?C@L?#0?FN?M?\nx?H4??rr`\n??D?#?????@?Wt\Z???.??wa???œ-wr!???+>?D?gort???we?~??1???', '$2y$10$1vZLTtzZPb.xfR3hNhcVKuLYdZX5ne5vrcFRi.ITVY7LgMdZ1nObC.png', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -295,19 +312,19 @@ ALTER TABLE `tbl_level`
 -- AUTO_INCREMENT for table `tbl_log`
 --
 ALTER TABLE `tbl_log`
-  MODIFY `id_log` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_log` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `tbl_pengajuan`
 --
 ALTER TABLE `tbl_pengajuan`
-  MODIFY `id_pengajuan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pengajuan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_pengajuan_detail`
 --
 ALTER TABLE `tbl_pengajuan_detail`
-  MODIFY `id_pengajuan_detail` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_pengajuan_detail` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

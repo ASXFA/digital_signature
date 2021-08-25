@@ -29,9 +29,11 @@
                         <h4 class="d-inline">
                             List Data Pengajuan
                             <span class="float-right">
+                                {% if level_akun_login == 3 %}
                                 <button class="btn btn-primary btn-sm " id="btn-tambah"> <i
                                         class="fa fa-plus-circle"></i> Tambah
                                     Data</button>
+                                {% endif %}
                                 {% if level_akun_login == 1 %}
                                 <a href="viewHapusPengajuan" class="btn btn-warning btn-sm "> <i
                                         class="fa fa-recycle"></i>
@@ -173,5 +175,8 @@
 <!-- /.content -->
 {% endblock %}
 {% block js %}
+<script>
+    var base_url = "{{base_url}}";
+</script>
 <script src="{{base_url}}assets/action/pengajuan.js"></script>
 {% endblock %}

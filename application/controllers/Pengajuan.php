@@ -1,4 +1,12 @@
 <?php
+
+use phpseclib3\Crypt\RSA;
+use phpseclib3\Crypt\RSA\Formats\Keys\PKCS8;
+use phpseclib3\Crypt\RSA\PrivateKey;
+use phpseclib3\Crypt\RSA\PublicKey;
+use phpseclib3\Crypt\PublicKeyLoader;
+use phpseclib3\Math\BigInteger;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Pengajuan extends CI_Controller
@@ -71,6 +79,8 @@ class Pengajuan extends CI_Controller
                 if ($this->level == 1) {
                     if ($row->deleted_at == NULL) {
                         $sub_data = array();
+                        $e = password_hash($row->id_pengajuan, PASSWORD_DEFAULT);
+                        $q = '';
                         $sub_data[] = $no + 1;
                         // $sub_data[] = $row->id_pengajuan;
                         // $mhs = $this->model_mhs->getBy(array('id_mhs' => $row->id_mhs_pengajuan))->row();
@@ -93,7 +103,7 @@ class Pengajuan extends CI_Controller
                             <i class="fa fa-ellipsis-h"></i>
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item detail" id="' . $row->id_pengajuan . '" href="#"><i class="fas fa-eye"></i> Detail</a>
+                            <a class="dropdown-item" href="' . base_url('pengajuan/detailPengajuan/') . urlencode(base64_encode($row->id_pengajuan)) . '" href="#"><i class="fas fa-eye"></i> Detail</a>
                             <a class="dropdown-item hapus" id="' . $row->id_pengajuan . '" href="#"><i class="fas fa-trash"></i> Hapus</a>
                         </div>
                         </div>';
@@ -102,73 +112,73 @@ class Pengajuan extends CI_Controller
                     }
                 } else if ($this->level == 2) {
                     $checkPengajuan = $this->model_pengajuan_detail->getBy(array('id_pengesah' => $this->id_user))->result();
-                    $no = 0;
                     foreach ($checkPengajuan as $cp) {
-                        if ($no == 0) {
-                            $id_pengajuan_skrg = $cp->id_pengajuan;
-                            if ($id_pengajuan_skrg == $row->id_pengajuan) {
-                                $sub_data = array();
-                                $sub_data[] = $no + 1;
-                                // $sub_data[] = $row->id_pengajuan;
-                                // $mhs = $this->model_mhs->getBy(array('id_mhs' => $row->id_mhs_pengajuan))->row();
-                                $sub_data[] = $row->nama_mhs;
-                                $sub_data[] = $row->perihal_pengajuan;
-                                $sub_data[] = "<a class='link-primary' target='_blank' href='" . base_url() . "assets/file/pengajuan/" . $row->nama_file_pengajuan . "'>" . $row->nama_file_pengajuan . "</a>";
-                                $sub_data[] = date('d F Y H:i:sa', strtotime($row->tanggal_pengajuan));
-                                if ($row->status_pengajuan == 0) {
-                                    $html = '<span class="badge badge-warning p-2"> Dalam Proses </span>';
-                                } else if ($row->status_pengajuan == 1) {
-                                    $html = '<span class="badge badge-success p-2"> Selesai </span>';
-                                } else {
-                                    $html = '<span class="badge badge-danger p-2"> Di Tolak </span>';
-                                }
-                                $sub_data[] = $html;
-                                // $sub_data[] = date('d F Y', strtotime($row->created_at));
-                                // $sub_data[] = $row->created_by;
-                                $sub_data[] = '<div class="btn-group dropleft">
+                        // if ($no == 0) {
+                        //     $id_pengajuan_skrg = $cp->id_pengajuan;
+                        if ($cp->id_pengajuan == $row->id_pengajuan && $cp->id_pengesah == $this->id_user) {
+                            $sub_data = array();
+                            $sub_data[] = $no + 1;
+                            // $sub_data[] = $row->id_pengajuan;
+                            // $mhs = $this->model_mhs->getBy(array('id_mhs' => $row->id_mhs_pengajuan))->row();
+                            $sub_data[] = $row->nama_mhs;
+                            $sub_data[] = $row->perihal_pengajuan;
+                            $sub_data[] = "<a class='link-primary' target='_blank' href='" . base_url() . "assets/file/pengajuan/" . $row->nama_file_pengajuan . "'>" . $row->nama_file_pengajuan . "</a>";
+                            $sub_data[] = date('d F Y H:i:sa', strtotime($row->tanggal_pengajuan));
+                            if ($row->status_pengajuan == 0) {
+                                $html = '<span class="badge badge-warning p-2"> Dalam Proses </span>';
+                            } else if ($row->status_pengajuan == 1) {
+                                $html = '<span class="badge badge-success p-2"> Selesai </span>';
+                            } else {
+                                $html = '<span class="badge badge-danger p-2"> Di Tolak </span>';
+                            }
+                            $sub_data[] = $html;
+                            // $sub_data[] = date('d F Y', strtotime($row->created_at));
+                            // $sub_data[] = $row->created_by;
+                            $sub_data[] = '<div class="btn-group dropleft">
                             <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-ellipsis-h"></i>
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item detail" id="' . $row->id_pengajuan . '" href="#"><i class="fas fa-eye"></i> Detail</a>
+                                <a class="dropdown-item" href="' . base_url('pengajuan/detailPengajuan/') . urlencode(base64_encode($row->id_pengajuan)) . '" href="#"><i class="fas fa-eye"></i> Detail</a>
                                 <a class="dropdown-item ds" id="' . $row->id_pengajuan . '" href="#"><i class="fas fa-edit"></i> Digital Signature</a>
                             </div>
                             </div>';
-                                $data[] = $sub_data;
-                                $no++;
-                            }
-                        } else {
-                            if ($id_pengajuan_skrg != $cp->id_pengadaan) {
-                                $sub_data = array();
-                                $sub_data[] = $no + 1;
-                                // $sub_data[] = $row->id_pengajuan;
-                                // $mhs = $this->model_mhs->getBy(array('id_mhs' => $row->id_mhs_pengajuan))->row();
-                                $sub_data[] = $row->nama_mhs;
-                                $sub_data[] = $row->perihal_pengajuan;
-                                $sub_data[] = "<a class='link-primary' target='_blank' href='" . base_url() . "assets/file/pengajuan/" . $row->nama_file_pengajuan . "'>" . $row->nama_file_pengajuan . "</a>";
-                                $sub_data[] = date('d F Y H:i:sa', strtotime($row->tanggal_pengajuan));
-                                if ($row->status_pengajuan == 0) {
-                                    $html = '<span class="badge badge-warning p-2"> Dalam Proses </span>';
-                                } else if ($row->status_pengajuan == 1) {
-                                    $html = '<span class="badge badge-success p-2"> Selesai </span>';
-                                } else {
-                                    $html = '<span class="badge badge-danger p-2"> Di Tolak </span>';
-                                }
-                                $sub_data[] = $html;
-                                // $sub_data[] = date('d F Y', strtotime($row->created_at));
-                                // $sub_data[] = $row->created_by;
-                                $sub_data[] = '<div class="btn-group dropleft">
-                            <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-ellipsis-h"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item detail" id="' . $row->id_pengajuan . '" href="#"><i class="fas fa-eye"></i> Detail</a>
-                                <a class="dropdown-item ds" id="' . $row->id_pengajuan . '" href="#"><i class="fas fa-edit"></i> Digital Signature</a>
-                            </div>
-                            </div>';
-                                $data[] = $sub_data;
-                                $no++;
-                            }
+                            $data[] = $sub_data;
+                            $no++;
+                            //     }
+                            // } else {
+                            //     $id_pengajuan_skrg = $cp->id_pengajuan;
+                            //     if ($id_pengajuan_skrg != $cp->id_pengajuan && $cp-> ) {
+                            //         $sub_data = array();
+                            //         $sub_data[] = $no + 1;
+                            //         // $sub_data[] = $row->id_pengajuan;
+                            //         // $mhs = $this->model_mhs->getBy(array('id_mhs' => $row->id_mhs_pengajuan))->row();
+                            //         $sub_data[] = $row->nama_mhs;
+                            //         $sub_data[] = $row->perihal_pengajuan;
+                            //         $sub_data[] = "<a class='link-primary' target='_blank' href='" . base_url() . "assets/file/pengajuan/" . $row->nama_file_pengajuan . "'>" . $row->nama_file_pengajuan . "</a>";
+                            //         $sub_data[] = date('d F Y H:i:sa', strtotime($row->tanggal_pengajuan));
+                            //         if ($row->status_pengajuan == 0) {
+                            //             $html = '<span class="badge badge-warning p-2"> Dalam Proses </span>';
+                            //         } else if ($row->status_pengajuan == 1) {
+                            //             $html = '<span class="badge badge-success p-2"> Selesai </span>';
+                            //         } else {
+                            //             $html = '<span class="badge badge-danger p-2"> Di Tolak </span>';
+                            //         }
+                            //         $sub_data[] = $html;
+                            //         // $sub_data[] = date('d F Y', strtotime($row->created_at));
+                            //         // $sub_data[] = $row->created_by;
+                            //         $sub_data[] = '<div class="btn-group dropleft">
+                            //     <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            //         <i class="fa fa-ellipsis-h"></i>
+                            //     </button>
+                            //     <div class="dropdown-menu">
+                            //         <a class="dropdown-item" href="' . base_url('pengajuan/detailPengajuan/') . urlencode(base64_encode($row->id_pengajuan)) . '" href="#"><i class="fas fa-eye"></i> Detail</a>
+                            //         <a class="dropdown-item ds" id="' . $row->id_pengajuan . '" href="#"><i class="fas fa-edit"></i> Digital Signature</a>
+                            //     </div>
+                            //     </div>';
+                            //         $data[] = $sub_data;
+                            //         $no++;
+                            //     }
                         }
                     }
                 } else if ($this->level == 3) {
@@ -196,7 +206,7 @@ class Pengajuan extends CI_Controller
                             <i class="fa fa-ellipsis-h"></i>
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item detail" id="' . $row->id_pengajuan . '" href="#"><i class="fas fa-eye"></i> Detail</a>
+                            <a class="dropdown-item" href="' . base_url('pengajuan/detailPengajuan/') . urlencode(base64_encode($row->id_pengajuan)) . '" href="#"><i class="fas fa-eye"></i> Detail</a>
                             <a class="dropdown-item edit" id="' . $row->id_pengajuan . '" href="#"><i class="fas fa-edit"></i> Edit</a>
                         </div>
                         </div>';
@@ -215,6 +225,21 @@ class Pengajuan extends CI_Controller
         );
 
         echo json_encode($output);
+    }
+
+    public function detailPengajuan($id = "")
+    {
+        // $data = "asd";
+        // write_file('./assets/file/key/file.pem', $data);
+        $decId = base64_decode(urldecode($id));
+        $pengajuan = $this->model_pengajuan->getBy(array('id_pengajuan' => $decId))->row();
+        $detail = $this->model_pengajuan_detail->getBy(array('id_pengajuan' => $decId))->result();
+        $this->content['page'] = 'Detail Pengajuan';
+        $this->content['pengesah'] = $this->model_akun->getBy(array('level_akun' => 2))->result();
+        $this->content['allUser'] = $this->model_user->getAll();
+        $this->content['pengajuan'] = $pengajuan;
+        $this->content['detail'] = $detail;
+        $this->twig->display('detailPengajuan.html', $this->content);
     }
 
     public function pengajuanById()
@@ -266,12 +291,27 @@ class Pengajuan extends CI_Controller
             } else {
                 $file_ext = $this->upload->data('file_ext');
                 if ($file_ext == '.pdf') {
+                    // create Private Key
+                    $private = RSA::createKey()->withMGFHash('sha256');
+                    $data = $private->toString('PSS');
+                    $filename1 = sha1('private') . '.pem';
+                    $this->createFile($filename1, $data);
+
+                    // create Public key
+                    $public = $private->getPublicKey()->withMGFHash('sha256');
+                    $data2 = $public->toString('PSS');
+                    $filename2 = sha1('public') . '.pem';
+                    $this->createFile($filename2, $data2);
+
+
                     $nama_file = $this->upload->data('file_name');
                     $data = array(
                         'id_mhs_pengajuan'  => $this->id_user,
                         'perihal_pengajuan' => $this->input->post('perihal_pengajuan'),
                         'deskripsi_pengajuan' => $this->input->post('deskripsi_pengajuan'),
                         'nama_file_pengajuan' => $nama_file,
+                        'private_key_pengajuan' => $filename1,
+                        'public_key_pengajuan' => $filename2,
                         'status_pengajuan' => 0,
                         'created_by' => $this->content['nama_akun_login']
                     );
@@ -415,8 +455,7 @@ class Pengajuan extends CI_Controller
         if ($this->level == 1) {
             $this->content['page'] = 'List Data Hapus';
             $this->twig->display('listHapusPengajuan.html', $this->content);
-        }else{
-            
+        } else {
         }
     }
 
@@ -543,5 +582,17 @@ class Pengajuan extends CI_Controller
         $this->content['akun'] = $akun;
         $this->content['level'] = $level;
         $this->twig->display('profilMhs.html', $this->content);
+    }
+
+    public function pengajuanDetailId()
+    {
+        $id = $this->input->post('id');
+        $detail = $this->model_pengajuan_detail->getBy(array('id_pengajuan_detail' => $id))->row();
+        echo json_encode($detail);
+    }
+
+    function createFile($filename, $data)
+    {
+        write_file('./assets/file/key/' . $filename, $data);
     }
 }

@@ -303,4 +303,72 @@ $(function(){
         })
     })
 
+    $(document).on('click','.sign',function(){
+        Swal.fire({
+            title: 'Yakin melakukan tanda tangan digital ?',
+            text: 'anda akan menandatangani pengajuan ini !',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Tanda Tangan !'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var id = $(this).attr('id');
+                $.ajax({
+                    method:'POST',
+                    dataType:'JSON',
+                    data:{id:id},
+                    url:base_url+'sign',
+                    success:function(results){
+                        if (results.cond == '1') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: results.msg,
+                                timer:3000,
+                            }).then((results) => {
+                                /* Read more about handling dismissals below */
+                                if (results.dismiss === Swal.DismissReason.timer) {
+                                    location.reload();
+                                }else if(results.isConfirmed){
+                                    location.reload();
+                                }
+                            })
+                        }else{
+                            Swal.fire({
+                                icon: 'error',
+                                title: results.msg,
+                                timer:3000,
+                            }).then((results) => {
+                                /* Read more about handling dismissals below */
+                                if (results.dismiss === Swal.DismissReason.timer) {
+                                    location.reload();
+                                }else if(results.isConfirmed){
+                                    location.reload();
+                                }
+                            })
+                        }
+                    }
+                })
+            }
+        })
+    })
+
+    $(document).on('click','.btn-qr',function(){
+        var id = $(this).attr('id');
+        $('#modal-qr').modal({backdrop: 'static',show:true});
+        $('#exampleModalLabel').html('Detail QRCODE'); 
+        $.ajax({
+            method:'POST',
+            dataType:'JSON',
+            data: {id:id},
+            url:base_url+'pengajuanDetailId',
+            success:function(result){
+                var html = '';
+                html += '<img class="img-thumbnail d-block mx-auto" src="'+base_url+'assets/file/images/'+result.qr_code+'">';
+                $('#body-modal').html(html);
+            }
+        })
+    })
+
 })
