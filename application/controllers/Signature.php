@@ -179,7 +179,7 @@ class Signature extends CI_Controller
         $config['white']        = array(70, 130, 180); // array, default is array(0,0,0)
         $this->ciqrcode->initialize($config);
 
-        $image_name = str_replace('.pdf', '_', $nama_file) . 'verified_' . date('d m Y') . '.png';
+        $image_name = str_replace('.pdf', '_', $nama_file) . 'verified_' . date('d_m_Y') . '.png';
 
         $params['data'] = $crypt;
         $params['level'] = 'H';
@@ -205,7 +205,7 @@ class Signature extends CI_Controller
         $pdf->SetFont('Helvetica');
         $pdf->SetXY(45, 5);
         $pdf->Write(8, 'Scan Bardcode dibawah untuk mengecek keabsahan dokumen anda ');
-        $file_name = str_replace(".pdf", "_", $nama_file) . 'verified_' . date('d m Y') . '.pdf';
+        $file_name = str_replace(".pdf", "_", $nama_file) . 'verified_' . date('d_m_Y') . '.pdf';
         $pdf->Output(FCPATH . './assets/file/dokumen_akhir/' . $file_name, 'F');
         $return = array(
             'filename' => $file_name,
