@@ -370,5 +370,105 @@ $(function(){
             }
         })
     })
+    $('#pesan_pengajuan').summernote({
+        toolbar: [
+            // [groupName, [list of button]]
+            ['style', ['bold', 'italic', 'underline']],
+            ['para', ['ul', 'ol', 'paragraph']]
+          ]
+    })
+
+    $('#btn-tolak').click(function(){
+        $('#modal-tolak').modal({backdrop: 'static',show:true});
+        $('#exampleModalLabelTolak').html('Form Penolakan Pengajuan');
+    })
+
+    $('#form-tolak').submit(function(e){
+        e.preventDefault();
+        var pesan_pengajuan = $('#pesan_pengajuan').val();
+        if (pesan_pengajuan) {
+            $.ajax({
+                method:'POST',
+                dataType:'JSON',
+                processData: false,
+                contentType: false,
+                data:new FormData(this),
+                url:base_url+'gantiStatusPengajuan',
+                success:function(result){
+                    Swal.fire({
+                        icon: 'success',
+                        title: result.msg,
+                        timer:3000,
+                    }).then((results) => {
+                        /* Read more about handling dismissals below */
+                        if (results.dismiss === Swal.DismissReason.timer) {
+                            location.reload();
+                        }else if(results.isConfirmed){
+                            location.reload();
+                        }
+                    })
+                }
+            })
+        }else{
+            Swal.fire({
+                icon: 'Warning',
+                title: 'Peringatan !',
+                text: 'Field Tidak boleh kosong !'
+            })
+        }
+    })
+
+    $(document).on('click','.proses',function(){
+        Swal.fire({
+            title: 'Pengajuan tersebut akan diproses ?',
+            text: 'pengajuan ini akan dilanjutkan ke proses tanda tangan !',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var id = $(this).attr('id');
+                var status = 1;
+                var pesan_pengajuan = '-';
+                $.ajax({
+                    method:'POST',
+                    dataType:'JSON',
+                    data:{id:id,status:status,pesan_pengajuan:pesan_pengajuan},
+                    url:base_url+'gantiStatusPengajuan',
+                    success:function(results){
+                        if (results.cond == '1') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: results.msg,
+                                timer:3000,
+                            }).then((results) => {
+                                /* Read more about handling dismissals below */
+                                if (results.dismiss === Swal.DismissReason.timer) {
+                                    location.reload();
+                                }else if(results.isConfirmed){
+                                    location.reload();
+                                }
+                            })
+                        }else{
+                            Swal.fire({
+                                icon: 'error',
+                                title: results.msg,
+                                timer:3000,
+                            }).then((results) => {
+                                /* Read more about handling dismissals below */
+                                if (results.dismiss === Swal.DismissReason.timer) {
+                                    location.reload();
+                                }else if(results.isConfirmed){
+                                    location.reload();
+                                }
+                            })
+                        }
+                    }
+                })
+            }
+        })
+    })
 
 })

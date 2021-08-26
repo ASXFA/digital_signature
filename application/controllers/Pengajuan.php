@@ -89,9 +89,11 @@ class Pengajuan extends CI_Controller
                         $sub_data[] = "<a class='link-primary' target='_blank' href='" . base_url() . "assets/file/pengajuan/" . $row->nama_file_pengajuan . "'>" . $row->nama_file_pengajuan . "</a>";
                         $sub_data[] = date('d F Y H:i:sa', strtotime($row->tanggal_pengajuan));
                         if ($row->status_pengajuan == 0) {
-                            $html = '<span class="badge badge-warning p-2"> Dalam Proses </span>';
+                            $html = '<span class="badge badge-warning p-2"> Sedang ditinjau </span>';
                         } else if ($row->status_pengajuan == 1) {
-                            $html = '<span class="badge badge-success p-2"> Selesai </span>';
+                            $html = '<span class="badge badge-primary p-2"> Dalam Proses </span>';
+                        } else if ($row->status_pengajuan == 2) {
+                            $html = '<span class="badge badge-success p-2"> Verified </span>';
                         } else {
                             $html = '<span class="badge badge-danger p-2"> Di Tolak </span>';
                         }
@@ -125,9 +127,11 @@ class Pengajuan extends CI_Controller
                             $sub_data[] = "<a class='link-primary' target='_blank' href='" . base_url() . "assets/file/pengajuan/" . $row->nama_file_pengajuan . "'>" . $row->nama_file_pengajuan . "</a>";
                             $sub_data[] = date('d F Y H:i:sa', strtotime($row->tanggal_pengajuan));
                             if ($row->status_pengajuan == 0) {
-                                $html = '<span class="badge badge-warning p-2"> Dalam Proses </span>';
+                                $html = '<span class="badge badge-warning p-2"> Sedang ditinjau </span>';
                             } else if ($row->status_pengajuan == 1) {
-                                $html = '<span class="badge badge-success p-2"> Selesai </span>';
+                                $html = '<span class="badge badge-primary p-2"> Dalam Proses </span>';
+                            } else if ($row->status_pengajuan == 2) {
+                                $html = '<span class="badge badge-success p-2"> Verified </span>';
                             } else {
                                 $html = '<span class="badge badge-danger p-2"> Di Tolak </span>';
                             }
@@ -140,7 +144,6 @@ class Pengajuan extends CI_Controller
                             </button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="' . base_url('pengajuan/detailPengajuan/') . urlencode(base64_encode($row->id_pengajuan)) . '" href="#"><i class="fas fa-eye"></i> Detail</a>
-                                <a class="dropdown-item ds" id="' . $row->id_pengajuan . '" href="#"><i class="fas fa-edit"></i> Digital Signature</a>
                             </div>
                             </div>';
                             $data[] = $sub_data;
@@ -192,16 +195,19 @@ class Pengajuan extends CI_Controller
                         $sub_data[] = "<a class='link-primary' target='_blank' href='" . base_url() . "assets/file/pengajuan/" . $row->nama_file_pengajuan . "'>" . $row->nama_file_pengajuan . "</a>";
                         $sub_data[] = date('d F Y H:i:sa', strtotime($row->tanggal_pengajuan));
                         if ($row->status_pengajuan == 0) {
-                            $html = '<span class="badge badge-warning p-2"> Dalam Proses </span>';
+                            $html = '<span class="badge badge-warning p-2"> Sedang ditinjau </span>';
                         } else if ($row->status_pengajuan == 1) {
-                            $html = '<span class="badge badge-success p-2"> Selesai </span>';
+                            $html = '<span class="badge badge-primary p-2"> Dalam Proses </span>';
+                        } else if ($row->status_pengajuan == 2) {
+                            $html = '<span class="badge badge-success p-2"> Verified </span>';
                         } else {
                             $html = '<span class="badge badge-danger p-2"> Di Tolak </span>';
                         }
                         $sub_data[] = $html;
                         // $sub_data[] = date('d F Y', strtotime($row->created_at));
                         // $sub_data[] = $row->created_by;
-                        $sub_data[] = '<div class="btn-group dropleft">
+                        if ($row->status_pengajuan == 0) {
+                            $sub_data[] = '<div class="btn-group dropleft">
                         <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-ellipsis-h"></i>
                         </button>
@@ -210,6 +216,16 @@ class Pengajuan extends CI_Controller
                             <a class="dropdown-item edit" id="' . $row->id_pengajuan . '" href="#"><i class="fas fa-edit"></i> Edit</a>
                         </div>
                         </div>';
+                        } else {
+                            $sub_data[] = '<div class="btn-group dropleft">
+                        <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-ellipsis-h"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="' . base_url('pengajuan/detailPengajuan/') . urlencode(base64_encode($row->id_pengajuan)) . '" href="#"><i class="fas fa-eye"></i> Detail</a>
+                        </div>
+                        </div>';
+                        }
                         $data[] = $sub_data;
                         $no++;
                     }
@@ -294,14 +310,14 @@ class Pengajuan extends CI_Controller
                     // create Private Key
                     $private = RSA::createKey()->withMGFHash('sha256');
                     $data = $private->toString('PSS');
-                    $filename1 = sha1('private') . '.pem';
-                    $this->createFile($filename1, $data);
+                    $filename = sha1('private') . '.pem';
+                    $this->createFile($filename, $data);
 
                     // create Public key
-                    $public = $private->getPublicKey()->withMGFHash('sha256');
-                    $data2 = $public->toString('PSS');
-                    $filename2 = sha1('public') . '.pem';
-                    $this->createFile($filename2, $data2);
+                    // $public = $private->getPublicKey()->withMGFHash('sha256');
+                    // $data2 = $public->toString('PSS');
+                    // $filename2 = sha1('public') . '.pem';
+                    // $this->createFile($filename2, $data2);
 
 
                     $nama_file = $this->upload->data('file_name');
@@ -310,8 +326,7 @@ class Pengajuan extends CI_Controller
                         'perihal_pengajuan' => $this->input->post('perihal_pengajuan'),
                         'deskripsi_pengajuan' => $this->input->post('deskripsi_pengajuan'),
                         'nama_file_pengajuan' => $nama_file,
-                        'private_key_pengajuan' => $filename1,
-                        'public_key_pengajuan' => $filename2,
+                        'private_key_pengajuan' => $filename,
                         'status_pengajuan' => 0,
                         'created_by' => $this->content['nama_akun_login']
                     );
@@ -582,6 +597,40 @@ class Pengajuan extends CI_Controller
         $this->content['akun'] = $akun;
         $this->content['level'] = $level;
         $this->twig->display('profilMhs.html', $this->content);
+    }
+
+    public function gantiStatusPengajuan()
+    {
+        $id = $this->input->post('id');
+        $pesan = $this->input->post('pesan_pengajuan');
+        $status = $this->input->post('status');
+        $pengajuan = $this->model_pengajuan->getBy(array('id_pengajuan' => $id))->row();
+        $data = array(
+            'status_pengajuan' => $status,
+            'pesan_pengajuan' => $pesan
+        );
+        $exec = $this->model_pengajuan->edit(array('id_pengajuan' => $id), $data);
+        if ($status == 1) {
+            $log = array(
+                'nama_aktor_log' => $this->content['nama_akun_login'],
+                'aksi_log' => 'User dengan ID ' . $this->id_user . ' MENERIMA pengajuan dengan perihal ' . $pengajuan->perihal_pengajuan
+            );
+        } else if ($status == 3) {
+            $log = array(
+                'nama_aktor_log' => $this->content['nama_akun_login'],
+                'aksi_log' => 'User dengan ID ' . $this->id_user . ' MENOLAK pengajuan dengan perihal ' . $pengajuan->perihal_pengajuan
+            );
+        }
+        $this->model_log->insert($log);
+        $output = array();
+        if ($exec) {
+            $output['cond'] = '1';
+            $output['msg'] = 'Berhasil';
+        } else {
+            $output['cond'] = '0';
+            $output['msg'] = 'Gagal';
+        }
+        echo json_encode($output);
     }
 
     public function pengajuanDetailId()

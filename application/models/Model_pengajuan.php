@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Model_pengajuan extends CI_Model
 {
     var $table = 'tbl_pengajuan';
-    var $select_column = array('id_pengajuan', 'id_mhs_pengajuan', 'id_mhs', 'nama_mhs', 'npm_mhs', 'prodi_mhs', 'perihal_pengajuan', 'deskripsi_pengajuan', 'tanggal_pengajuan', 'private_key_pengajuan', 'public_key_pengajuan', 'nama_file_pengajuan', 'status_pengajuan', 'tbl_pengajuan.created_at', 'tbl_pengajuan.created_by', 'tbl_pengajuan.updated_at', 'tbl_pengajuan.updated_by', 'tbl_pengajuan.deleted_at', 'tbl_pengajuan.deleted_by');
+    var $select_column = array('id_pengajuan', 'id_mhs_pengajuan', 'id_mhs', 'nama_mhs', 'npm_mhs', 'prodi_mhs', 'perihal_pengajuan', 'deskripsi_pengajuan', 'tanggal_pengajuan', 'private_key_pengajuan', 'nama_file_pengajuan', 'nama_file_verified_pengajuan', 'pesan_pengajuan', 'status_pengajuan', 'tbl_pengajuan.created_at', 'tbl_pengajuan.created_by', 'tbl_pengajuan.updated_at', 'tbl_pengajuan.updated_by', 'tbl_pengajuan.deleted_at', 'tbl_pengajuan.deleted_by');
     var $order_column = array(null, 'id_pengajuan', 'id_mhs_pengajuan', 'perihal_pengajuan', 'deskripsi_pengajuan', 'tanggal_pengajuan', 'nama_file_pengajuan', 'status_pengajuan', 'tbl_pengajuan.created_at', 'tbl_pengajuan.created_by', 'tbl_pengajuan.updated_at', 'tbl_pengajuan.updated_by', 'tbl_pengajuan.deleted_at', 'tbl_pengajuan.deleted_by', null);
 
     function make_query()

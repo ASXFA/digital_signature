@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 25, 2021 at 01:01 PM
+-- Generation Time: Aug 26, 2021 at 03:25 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.19
 
@@ -126,7 +126,45 @@ INSERT INTO `tbl_log` (`id_log`, `nama_aktor_log`, `aksi_log`, `tanggal_log`) VA
 (37, 'mahasiswa', 'Mahasiswa denga ID MHS0001 Mengajukan berkas dengan perihal Tanda tangan kegiatan A', '2021-08-25 10:13:43'),
 (38, 'mahasiswa', 'Mahasiswa denga ID MHS0001 Mengajukan berkas dengan perihal Tanda tangan kegiatan A', '2021-08-25 10:33:14'),
 (39, 'mahasiswa', 'Mahasiswa denga ID MHS0001 Mengajukan berkas dengan perihal Tanda tangan kegiatan A', '2021-08-25 10:34:32'),
-(40, 'mahasiswa', 'Mahasiswa denga ID MHS0001 Mengajukan berkas dengan perihal Tanda Tangan kegiatan Seminar', '2021-08-25 12:40:55');
+(40, 'mahasiswa', 'Mahasiswa denga ID MHS0001 Mengajukan berkas dengan perihal Tanda Tangan kegiatan Seminar', '2021-08-25 12:40:55'),
+(41, 'mahasiswa', 'Mahasiswa denga ID MHS0001 Mengajukan berkas dengan perihal Tanda Tangan kegiatan Seminar', '2021-08-26 07:28:54'),
+(42, 'USER', 'User USER Melakukan Tanda Tangan pada pengajuan Tanda Tangan kegiatan Seminar', '2021-08-26 09:18:20'),
+(43, 'prodi', 'User prodi Melakukan Tanda Tangan pada pengajuan Tanda Tangan kegiatan Seminar', '2021-08-26 09:22:20'),
+(44, 'prodi', 'User prodi Melakukan Tanda Tangan pada pengajuan Tanda Tangan kegiatan Seminar', '2021-08-26 09:24:42'),
+(45, 'WD 3', 'User WD 3 Melakukan Tanda Tangan pada pengajuan Tanda Tangan kegiatan Seminar', '2021-08-26 09:27:42'),
+(46, 'WD 3', 'User WD 3 Melakukan Tanda Tangan pada pengajuan Tanda Tangan kegiatan Seminar', '2021-08-26 09:28:27'),
+(47, 'WD 3', 'User WD 3 Melakukan Tanda Tangan pada pengajuan Tanda Tangan kegiatan Seminar', '2021-08-26 09:29:52'),
+(48, 'WD 3', 'User WD 3 Melakukan Tanda Tangan pada pengajuan Tanda Tangan kegiatan Seminar', '2021-08-26 09:32:31'),
+(49, 'WD 3', 'User WD 3 Melakukan Tanda Tangan pada pengajuan Tanda Tangan kegiatan Seminar', '2021-08-26 09:37:32'),
+(50, 'WD 3', 'User WD 3 Melakukan Tanda Tangan pada pengajuan Tanda Tangan kegiatan Seminar', '2021-08-26 09:40:08'),
+(51, 'WD 3', 'User WD 3 Melakukan Tanda Tangan pada pengajuan Tanda Tangan kegiatan Seminar', '2021-08-26 09:41:28'),
+(52, 'prodi', 'User prodi Melakukan Tanda Tangan pada pengajuan Tanda Tangan kegiatan Seminar', '2021-08-26 09:42:10'),
+(53, 'prodi', 'User prodi Melakukan Tanda Tangan pada pengajuan Tanda Tangan kegiatan Seminar', '2021-08-26 09:42:18'),
+(54, 'prodi', 'User prodi Melakukan Tanda Tangan pada pengajuan Tanda Tangan kegiatan Seminar', '2021-08-26 09:43:34'),
+(55, 'WD 3', 'User WD 3 Melakukan Tanda Tangan pada pengajuan Tanda Tangan kegiatan Seminar', '2021-08-26 09:44:14'),
+(56, 'TEST', 'User TEST Melakukan verifikasi pada pengajuan Tanda Tangan kegiatan Seminar', '2021-08-26 09:46:15'),
+(57, 'TEST', 'User TEST Melakukan verifikasi pada pengajuan Tanda Tangan kegiatan Seminar', '2021-08-26 09:48:07'),
+(58, 'TEST', 'User TEST Melakukan verifikasi pada pengajuan Tanda Tangan kegiatan Seminar', '2021-08-26 09:52:07'),
+(59, 'TEST', 'User TEST Melakukan verifikasi pada pengajuan Tanda Tangan kegiatan Seminar', '2021-08-26 09:52:51'),
+(60, 'TEST', 'User TEST Melakukan verifikasi pada pengajuan Tanda Tangan kegiatan Seminar', '2021-08-26 09:53:24'),
+(61, 'TEST', 'User TEST Melakukan verifikasi pada pengajuan Tanda Tangan kegiatan Seminar', '2021-08-26 13:14:47'),
+(62, 'TEST', 'User dengan ID USR0001 MENOLAK pengajuan dengan perihal Tanda Tangan kegiatan Seminar', '2021-08-26 14:37:02'),
+(63, 'mahasiswa', 'Mahasiswa denga ID MHS0001 Mengajukan berkas dengan perihal Tanda Tangan Kegiatan Seminar', '2021-08-26 14:46:03'),
+(64, 'TEST', 'User dengan ID USR0001 MENERIMA pengajuan dengan perihal Tanda Tangan Kegiatan Seminar', '2021-08-26 14:47:10'),
+(65, 'USER', 'User USER Melakukan Tanda Tangan pada pengajuan Tanda Tangan Kegiatan Seminar', '2021-08-26 14:49:34'),
+(66, 'prodi', 'User prodi Melakukan Tanda Tangan pada pengajuan Tanda Tangan Kegiatan Seminar', '2021-08-26 14:50:13'),
+(67, 'WD 3', 'User WD 3 Melakukan Tanda Tangan pada pengajuan Tanda Tangan Kegiatan Seminar', '2021-08-26 14:50:55'),
+(68, 'TEST', 'User TEST Melakukan verifikasi pada pengajuan Tanda Tangan Kegiatan Seminar', '2021-08-26 14:53:07'),
+(69, 'TEST', 'User TEST Melakukan verifikasi pada pengajuan Tanda Tangan Kegiatan Seminar', '2021-08-26 14:53:26'),
+(70, 'TEST', 'User TEST Melakukan verifikasi pada pengajuan Tanda Tangan Kegiatan Seminar', '2021-08-26 14:53:43'),
+(71, 'WD 3', 'User WD 3 Melakukan Tanda Tangan pada pengajuan Tanda Tangan Kegiatan Seminar', '2021-08-26 14:57:12'),
+(72, 'TEST', 'User TEST Melakukan verifikasi pada pengajuan Tanda Tangan Kegiatan Seminar', '2021-08-26 14:57:46'),
+(73, 'TEST', 'User TEST Melakukan verifikasi pada pengajuan Tanda Tangan Kegiatan Seminar', '2021-08-26 15:03:59'),
+(74, 'TEST', 'User TEST Melakukan verifikasi pada pengajuan Tanda Tangan Kegiatan Seminar', '2021-08-26 15:05:01'),
+(75, 'TEST', 'User TEST Melakukan verifikasi pada pengajuan Tanda Tangan Kegiatan Seminar', '2021-08-26 15:06:09'),
+(76, 'mahasiswa', 'User mahasiswa Melakukan verifikasi pada pengajuan Tanda Tangan Kegiatan Seminar', '2021-08-26 15:16:50'),
+(77, 'mahasiswa', 'User mahasiswa Melakukan verifikasi pada pengajuan Tanda Tangan Kegiatan Seminar', '2021-08-26 15:18:11'),
+(78, 'mahasiswa', 'User mahasiswa Melakukan verifikasi pada pengajuan Tanda Tangan Kegiatan Seminar', '2021-08-26 15:19:37');
 
 -- --------------------------------------------------------
 
@@ -169,8 +207,10 @@ CREATE TABLE `tbl_pengajuan` (
   `tanggal_pengajuan` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `tanggal_selesai_pengajuan` datetime DEFAULT NULL,
   `nama_file_pengajuan` varchar(150) NOT NULL,
+  `nama_file_verified_pengajuan` varchar(250) DEFAULT NULL,
+  `qr_pengajuan` varchar(250) DEFAULT NULL,
   `private_key_pengajuan` varchar(150) NOT NULL,
-  `public_key_pengajuan` varchar(255) NOT NULL,
+  `pesan_pengajuan` text,
   `status_pengajuan` int(5) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` varchar(150) NOT NULL,
@@ -184,9 +224,8 @@ CREATE TABLE `tbl_pengajuan` (
 -- Dumping data for table `tbl_pengajuan`
 --
 
-INSERT INTO `tbl_pengajuan` (`id_pengajuan`, `id_mhs_pengajuan`, `perihal_pengajuan`, `deskripsi_pengajuan`, `tanggal_pengajuan`, `tanggal_selesai_pengajuan`, `nama_file_pengajuan`, `private_key_pengajuan`, `public_key_pengajuan`, `status_pengajuan`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
-(11, 'MHS0001', 'Tanda tangan kegiatan A', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', '2021-08-25 10:34:32', NULL, 'fpdf-sign-demo9.pdf', 'e80721793c24ae14edfca9b26ad406a9815cd3ff.pem', '61c9b2b17db77a27841bbeeabff923448b0f6388.pem', 0, '2021-08-25 10:34:32', 'mahasiswa', NULL, NULL, NULL, NULL),
-(12, 'MHS0001', 'Tanda Tangan kegiatan Seminar', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.', '2021-08-25 12:40:55', NULL, 'Document1.pdf', 'e80721793c24ae14edfca9b26ad406a9815cd3ff.pem', '61c9b2b17db77a27841bbeeabff923448b0f6388.pem', 0, '2021-08-25 12:40:55', 'mahasiswa', NULL, NULL, NULL, NULL);
+INSERT INTO `tbl_pengajuan` (`id_pengajuan`, `id_mhs_pengajuan`, `perihal_pengajuan`, `deskripsi_pengajuan`, `tanggal_pengajuan`, `tanggal_selesai_pengajuan`, `nama_file_pengajuan`, `nama_file_verified_pengajuan`, `qr_pengajuan`, `private_key_pengajuan`, `pesan_pengajuan`, `status_pengajuan`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
+(14, 'MHS0001', 'Tanda Tangan Kegiatan Seminar', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2021-08-26 14:46:02', NULL, 'Isi_Artikel_185328192270.pdf', 'Isi_Artikel_185328192270_verified_26 08 2021.pdf', 'Isi_Artikel_185328192270_verified_26 08 2021.png', 'e80721793c24ae14edfca9b26ad406a9815cd3ff.pem', '-', 2, '2021-08-26 14:46:02', 'mahasiswa', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -210,10 +249,9 @@ CREATE TABLE `tbl_pengajuan_detail` (
 --
 
 INSERT INTO `tbl_pengajuan_detail` (`id_pengajuan_detail`, `id_pengajuan`, `id_pengesah`, `digital_signature`, `qr_code`, `status`, `deleted_at`, `deleted_by`) VALUES
-(24, 11, 'USR0002', '?Lg???A?`~?[Q?v?F??????\0???j?<wDh?+J?;??R???>8^??{?w?\0[?j????*???|?$:)????C??OzZ$???4??`?o?A?????(?*??I???`??2@i??wm??o<???@2?s ???0F?*?M??=V?9h???????t?_??e%???~G\\8F;v?\r???????b???$??}?[???&%??W??j4?2?;?\n??@???@\'lS??8s', '185c7ea5a4c185be2721c7b5d4b859c01279e9b3.png', 1, NULL, NULL),
-(25, 12, 'USR0002', '??;Q???-?.?	??\\?u7?ž?{??S?|iBTY??\Z/d=?X?X?qN?$????\"?r???Wþ?+dp?z????yx}? z???\0,h??Q[??K??|????$9???aWW?????g??l3B??????i??qU?jQ?[?3i?vW?+???Tem?????YG??`????e8?<P??????>??3??a?H???????@??pY?z?i<z?1?X9?iZ??T;/\"	 ??4', '$2y$10$hfVw2MthkBFmmAEmE4l3D.D23OQrTBNwHJ2b34dUtklXOparFKdc..png', 1, NULL, NULL),
-(26, 12, 'USR0003', '???luo?ZMw?(<??R?Kf#??????J?\01}?|?S9?^?de???-?6?.??.iK??q???}o9????a\"C?HXA??\nz?}?\n)????2?,?Q\"/3o?\"1??@???}}?NY	|???????%?X~i`??????e?v\Z?%?2?aA????K>q3xF?\rix\r??/;C&v?!`?\0??{#?e0????5?????w?I???Z\r??`??:?Q2?Q??O?QN???-', '$2y$10$TkVP7kWKdT7OFxxbXazFiOSwvuLV8ImJ.1HnFx3rSo5A94l5bx5ee.png', 1, NULL, NULL),
-(27, 12, 'USR0004', '?f????e?B?|?????\"?}??I?`j?!?\0?2???{??IF??e?%\ZX??\'B???j?0?VJ?}~?3??\0?s?v: cB\n?X[???H(??{%*?5??:YgF?\0h?/]?c???3D=???LC????O!w??i@?fs?&B?????%??>?C@L?#0?FN?M?\nx?H4??rr`\n??D?#?????@?Wt\Z???.??wa???œ-wr!???+>?D?gort???we?~??1???', '$2y$10$1vZLTtzZPb.xfR3hNhcVKuLYdZX5ne5vrcFRi.ITVY7LgMdZ1nObC.png', 1, NULL, NULL);
+(31, 14, 'USR0002', 'fWS1IeAzacWjtYjJptG0YRbAZI0KqI68n7u3ArWkua4xgPsjT2EII/VwER3KZXu2kuLtcsjWduQRYNsOd0YGCMr4E9x8+aZaVLOQLi+8mqqWWZDPKJRX4qOMkhjVPlCBocL2r0x7GskU0q7NZawsSA7mCZXLQD4vMlRZ8WqFp46P84rjSlIs8A6nKVzuDzk1NtooUe4bfuFP6CaVzIsIPPQLg7lZmTYULA4ekKjzJ/3+kFXPCLYTS9FyLJhlSV52ZIZujPNZejdjVs6tdP0lyAxYKoJk+SgftttE65zkGiusd1JSqctV148amkc60UkDgLUejLmW7nyjTt5A4cF8cA==', '185c7ea5a4c185be2721c7b5d4b859c01279e9b3.png', 2, NULL, NULL),
+(32, 14, 'USR0003', 'B0VAIHvOyGW40usk8YWto3GFMGDnKya9Awc2K0U9Z8Q9n6y4KCCLXwGURr8tXdCmdyVCbnDxDuuc9l/bu1RdZIRK9HRTYv3gPX8lP8eiQ0XzBhSmi04yleaeyWLAu98500VFUABtStu6pZJfAw2pOO6Cqr0XF8DavFgOQHvBMyQcQE18NQWD7BA66O0fJksKxsDwUG9dGoe1/MkDCSPKkXzLVpHnVSPIHK5J8WmJeSBE/kEvq3uZKBBPfMXSBIDWaFoQGBT/40RKH/loRrySWyuCTw+RQFrC/0c2MWvgbw0JbIW80aEkv9EsKB9IvdkMhpQXmKsw5e5wLUti1WOpoQ==', 'ac6b3a69ffd41b82ddb4213defe7cf47be121c04.png', 2, NULL, NULL),
+(33, 14, 'USR0004', 'Nyzrer3R6wZtQfD8+qlB68XAS/AjBaV10+aTeaKW6rE51BvFaRwEVzGmYjV5BMze8fcHLLWB/z2S7Iw6ORAQVuRUAPFQC3wSLSCDxeaFIIhY/0A1Uq81N1tF9S3AvA3dpvKCUXqYT85J7inas2tz7ngF8p2CzdXtbWxJnejXlUuSJw/Dx8jT9fnjUdoIS98ikbTRs0C5F/R77iqk6BUOMmPLyHLK6rnJYa940gEu2tUVF59m9u3ENIsCZ3kIdfZrjqekHXtDNYspAaB6ttqSqZEosArnDTfy33JdL+e863Q2+gqkf7OQoop1eJoB/LDTAWduatwJegzgXUk+6wqV3w==', 'c0afc15211b59fb9b02e25f7db1f6f3ef58f969b.png', 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -312,19 +350,19 @@ ALTER TABLE `tbl_level`
 -- AUTO_INCREMENT for table `tbl_log`
 --
 ALTER TABLE `tbl_log`
-  MODIFY `id_log` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_log` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `tbl_pengajuan`
 --
 ALTER TABLE `tbl_pengajuan`
-  MODIFY `id_pengajuan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_pengajuan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbl_pengajuan_detail`
 --
 ALTER TABLE `tbl_pengajuan_detail`
-  MODIFY `id_pengajuan_detail` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_pengajuan_detail` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
