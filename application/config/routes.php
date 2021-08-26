@@ -56,6 +56,8 @@ $route['translate_uri_dashes'] = FALSE;
 // ATUHENTICATION
 $route['^(action_login|logout)(/:any)?$'] = 'Auth/$0';
 
+$route['cekDokumen/(:any)'] = 'Frontend/cekDokumen/$1';
+
 // BACKEND
 $route['^(dashboard)(/:any)?$'] = 'Dashboard/$0';
 $route['^(listUser|userLists|doUser|userById|deleteUser|listHapus|viewHapus|restore|profilUser)(/:any)?$'] = 'User/$0';

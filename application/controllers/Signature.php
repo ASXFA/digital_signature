@@ -166,7 +166,7 @@ class Signature extends CI_Controller
 
     public function creatingVerifiedFile($id_pengajuan, $nama_file)
     {
-        $crypt = urlencode(base64_encode($id_pengajuan));
+        $crypt = base_url() . 'frontend/cekDokumen/' . urlencode(base64_encode($id_pengajuan));
         $this->load->library('ciqrcode');
 
         $config['cacheable']    = true; //boolean, the default is true
