@@ -1,22 +1,20 @@
 Struktur file : 
-1. Bila pakai XAMPP : xampp/htdocs/wisata
-2. Bila pakai Laragon : laragon/www/wisata
+1. Bila pakai XAMPP : xampp/htdocs/digital_signature
+2. Bila pakai Laragon : laragon/www/digital_signature
 
-nama database di mysql harus 'wisata' (hapus tanda petik)
+bila setelah didownload nama file / folder berubah menjadi digital_signature-main, hapus saja '-main' nya (tanpa tanda petik)
 
-akses aplikasi : localhost/wisata
+nama database di mysql harus 'digital_signature'(tanpa tanda petik) 
+
+akses aplikasi : localhost/digital_signature
 untuk akses ke halaman admin : localhost/wisata/auth
 
-user account : admin / 12345
-
-Jangan lupa untuk ganti nama aplikasinya, karna ada beberapa yang masih menggunakan kata "Nama Aplikasi". ada di : 
-1. wisata/application/view/front/template/layout.html
-2. wisata/application/view/front/index.html
-3. wisata/application/view/front/template/footer.html
-4. wisata/application/view/back/template/layout.html
-5. wisata/application/view/back/template/top_bar.html
-
-cara ganti dengan mudah, buka filenya, search 'nama aplikasi' (tanpa tanda petik). kemudian replace dengan yang diinginkan. 
+user account Perocbaan : 
+- test@example.com / 12345678 (BAK)
+- user@example.com / 123123123 (pengesah)
+- prodi@example.com / prodi@example.com (pengesah)
+- wd3@example.com / wd3@example.com (pengesah)
+- mhs@example.com / 33333333 (mahasiswa)
 
 
 terimakasih
