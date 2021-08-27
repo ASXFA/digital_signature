@@ -43,10 +43,21 @@ class Dashboard extends CI_Controller
             $this->content['jabatan_akun_login'] = 'Mahasiswa';
             $this->content['nomor_induk_akun_login'] = $get->npm_mhs;
         }
+        $this->load->model('model_pengajuan');
+        $this->load->model('model_user');
+        $this->load->model('model_mhs');
     }
 
     public function dashboard()
     {
+        if ($this->level == 1) {
+            $pengajuan = count($this->model_pengajuan->getAll());
+            $user = count($this->model_user->getAll());
+            $mhs = count($this->model_mhs->getAll());
+        }
+        $this->content['pengajuan'] = $pengajuan;
+        $this->content['user'] = $user;
+        $this->content['mhs'] = $mhs;
         $this->twig->display('dashboard.html', $this->content);
     }
 }
