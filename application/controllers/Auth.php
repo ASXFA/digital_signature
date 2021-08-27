@@ -76,6 +76,19 @@ class Auth extends CI_Controller
         }
     }
 
+    public function logoutAndroid()
+    {
+        $this->session->set_userdata('isLogin', 0);
+        $this->session->sess_destroy();
+
+        $output = array(
+            'status' => 200,
+            'pesan' => 'berhasil logout '
+        );
+
+        echo json_encode($output);
+    }
+
     public function logout()
     {
         $this->session->set_userdata('isLogin', 0);

@@ -72,6 +72,23 @@ class Frontend extends CI_Controller
         }
     }
 
+    public function userProfil()
+    {
+        $this->id = $this->session->userdata('id_akun_login');
+        $this->id_user = $this->session->userdata('id_user_akun_login');
+
+        $user = $this->model_user->getBy(array('id_user' => $this->id_user));
+        $data = array(
+            'id_user' => $user->id_user,
+            'nama_user' => $user->nama_user,
+            'nip_user' => $user->nip_user,
+            'jabatan_user' => $user->jabatan_user,
+            'no_hp_user' => $user->no_hp_user
+        );
+
+        echo json_encode($data);
+    }
+
     public function verify_signature()
     {
         $output = array();
