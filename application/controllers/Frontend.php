@@ -74,6 +74,7 @@ class Frontend extends CI_Controller
 
     public function userProfil()
     {
+        $this->load->model('model_user');
         $this->id = $this->session->userdata('id_akun_login');
         $this->id_user = $this->session->userdata('id_user_akun_login');
 
