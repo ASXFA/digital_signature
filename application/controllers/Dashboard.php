@@ -54,10 +54,10 @@ class Dashboard extends CI_Controller
             $pengajuan = count($this->model_pengajuan->getAll());
             $user = count($this->model_user->getAll());
             $mhs = count($this->model_mhs->getAll());
+            $this->content['pengajuan'] = $pengajuan;
+            $this->content['user'] = $user;
+            $this->content['mhs'] = $mhs;
         }
-        $this->content['pengajuan'] = $pengajuan;
-        $this->content['user'] = $user;
-        $this->content['mhs'] = $mhs;
         $this->twig->display('dashboard.html', $this->content);
     }
 }
