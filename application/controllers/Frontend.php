@@ -55,6 +55,8 @@ class Frontend extends CI_Controller
         $this->load->model('model_pengajuan');
         $this->load->model('model_pengajuan_detail');
         $this->load->model('model_log');
+        $this->load->model('model_user');
+        $this->load->model('model_akun');
     }
 
     public function cekDokumen($id = "")
@@ -75,63 +77,42 @@ class Frontend extends CI_Controller
     public function userProfil()
     {
         $this->load->model('model_user');
-        $this->id = $this->session->userdata('id_akun_login');
-        $this->id_user = $this->session->userdata('id_user_akun_login');
+        $isLogin = $this->input->post('isLogin');
+        if ($isLogin == 1) {
+            $id_user = $this->input->post('id_user');
+            $user = $this->model_user->getBy(array('id_user' => $id_user))->row();
 
-        $user = $this->model_user->getBy(array('id_user' => $this->id_user));
-        $data = array(
-            'id_user' => $user->id_user,
-            'nama_user' => $user->nama_user,
-            'nip_user' => $user->nip_user,
-            'jabatan_user' => $user->jabatan_user,
-            'no_hp_user' => $user->no_hp_user
-        );
-
+            $data = array(
+                'id_user' => $user->id_user,
+                'nama_user' => $user->nama_user,
+                'nip_user' => $user->nip_user,
+                'jabatan_user' => $user->jabatan_user,
+                'no_hp_user' => $user->no_hp_user,
+                'status' => 200,
+                'pesan' => 'Berhasil mengidentifikasi'
+            );
+        } else {
+            $data = array(
+                'status' => 500,
+                'pesan' => 'Gagal Mengidentifikasi'
+            );
+        }
         echo json_encode($data);
     }
 
     public function verify_signature()
     {
         $output = array();
-        $signature = $this->input->post('signature');
-        if ($this->session->userdata('isLogin') == 0) {
+        $isLogin = $this->input->post('isLogin');
+        if ($isLogin == 0) {
             $output['status'] = 500;
             $output['verify'] = "Silahkan login terlebih dahulu";
         } else {
-            $this->id = $this->session->userdata('id_akun_login');
-            $this->id_user = $this->session->userdata('id_user_akun_login');
-            $this->email = $this->session->userdata('email_akun_login');
-            $this->level = $this->session->userdata('level_akun_login');
-            $this->load->model('model_level');
-            $level = $this->model_level->getBy(array('id_level' => $this->level))->row();
-            $this->content = array(
-                'base_url' => base_url(),
-                'id_akun_login' => $this->id,
-                'id_user_akun_login' => $this->id_user,
-                'email_akun_login' => $this->email,
-                'level_akun_login' => $this->level,
-                'nama_level_akun_login' => $level->nama_level
-            );
-
-            $this->load->model('model_user');
-            $this->load->model('model_mhs');
-
-            $aktor = array();
-
-            // ambil data lengkap aktor login
-            if ($this->level != 3) {
-                $get = $this->model_user->getBy(array('id_user' => $this->id_user))->row();
-                $this->content['nama_akun_login'] = $get->nama_user;
-                $this->content['jabatan_akun_login'] = $get->jabatan_user;
-                $this->content['nomor_induk_akun_login'] = $get->nip_user;
-            } else if ($this->level == 3) {
-                $get = $this->model_mhs->getBy(array('id_mhs' => $this->id_user))->row();
-                $this->content['nama_akun_login'] = $get->nama_mhs;
-                $this->content['jabatan_akun_login'] = 'Mahasiswa';
-                $this->content['nomor_induk_akun_login'] = $get->npm_mhs;
-            }
             $signature = $this->input->post('signature');
             // $signature = "Nyzrer3R6wZtQfD8+qlB68XAS/AjBaV10+aTeaKW6rE51BvFaRwEVzGmYjV5BMze8fcHLLWB/z2S7Iw6ORAQVuRUAPFQC3wSLSCDxeaFIIhY/0A1Uq81N1tF9S3AvA3dpvKCUXqYT85J7inas2tz7ngF8p2CzdXtbWxJnejXlUuSJw/Dx8jT9fnjUdoIS98ikbTRs0C5F/R77iqk6BUOMmPLyHLK6rnJYa940gEu2tUVF59m9u3ENIsCZ3kIdfZrjqekHXtDNYspAaB6ttqSqZEosArnDTfy33JdL+e863Q2+gqkf7OQoop1eJoB/LDTAWduatwJegzgXUk+6wqV3w==";
+            $id_user = $this->input->post('id_user');
+            $user = $this->model_user->getBy(array('id_user' => $id_user))->row();
+            $akun = $this->model_akun->getBy(array('id_user_akun' => $id_user))->row();
             $detail = $this->model_pengajuan_detail->getBy(array('digital_signature' => $signature))->row();
             $pengajuan = $this->model_pengajuan->getBy(array('id_pengajuan' => $detail->id_pengajuan))->row();
             if (!empty($detail)) {
@@ -142,8 +123,8 @@ class Frontend extends CI_Controller
                 $verify = $key2->verify($detail->id_pengesah . '_' . $detail->id_pengajuan, $decodeSign);
                 if ($verify == 1) {
                     $log = array(
-                        'nama_aktor_log' => $this->content['nama_akun_login'],
-                        'aksi_log' => 'User ' . $this->content['nama_akun_login'] . ' Melakukan verifikasi pada pengajuan ' . $pengajuan->perihal_pengajuan,
+                        'nama_aktor_log' => $user->nama_user,
+                        'aksi_log' => 'User ' . $user->nama_user . ' Melakukan verifikasi pada pengajuan ' . $pengajuan->perihal_pengajuan,
                     );
                     $data = array('status' => 2);
                     $this->model_pengajuan_detail->edit(array('id_pengajuan_detail' => $detail->id_pengajuan_detail), $data);

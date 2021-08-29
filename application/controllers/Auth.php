@@ -39,6 +39,8 @@ class Auth extends CI_Controller
                     'level_akun_login' => $akun->level_akun
                 );
                 $this->session->set_userdata($session);
+                $pesan['isLogin'] = 1;
+                $pesan['id_user'] = $akun->id_user_akun;
                 $pesan['condition'] = 2;
                 $pesan['pesan'] = "Login Berhasil !";
                 $pesan['url'] = 'dashboard';
@@ -78,13 +80,23 @@ class Auth extends CI_Controller
 
     public function logoutAndroid()
     {
-        $this->session->set_userdata('isLogin', 0);
-        $this->session->sess_destroy();
+        $isLogin = $this->input->post('isLogin');
+        if ($isLogin == 1) {
+            $this->session->set_userdata('isLogin', 0);
+            $this->session->sess_destroy();
+            $isLogin = 0;
 
-        $output = array(
-            'status' => 200,
-            'pesan' => 'berhasil logout '
-        );
+            $output = array(
+                'status' => 200,
+                'pesan' => 'berhasil logout ',
+                'isLogin' => 0
+            );
+        } else {
+            $output = array(
+                'status' => 500,
+                'pesan' => 'Anda sudah logout'
+            );
+        }
 
         echo json_encode($output);
     }
