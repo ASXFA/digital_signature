@@ -100,6 +100,28 @@ class Frontend extends CI_Controller
         echo json_encode($data);
     }
 
+    public function logSign()
+    {
+        $this->load->model('model_user');
+        $isLogin = $this->input->post('isLogin');
+        if ($isLogin == 1) {
+            $id_user = $this->input->post('id_user');
+            $log = $this->model_log->getBy(array('id_user_log' => $id_user, 'kegiatan_log' => 'verify'))->result();
+
+            $data = array(
+                'status' => 200,
+                'pesan' => 'Berhasil mendapatkan log',
+                'log' => $log
+            );
+        } else {
+            $data = array(
+                'status' => 500,
+                'pesan' => 'Gagal Mengidentifikasi'
+            );
+        }
+        echo json_encode($data);
+    }
+
     public function verify_signature()
     {
         $output = array();
@@ -123,13 +145,8 @@ class Frontend extends CI_Controller
                 $decodeSign = base64_decode($signature);
                 $verify = $key2->verify($detail->id_pengesah . '_' . $detail->id_pengajuan, $decodeSign);
                 if ($verify == 1) {
-                    $log = array(
-                        'nama_aktor_log' => $user->nama_user,
-                        'aksi_log' => 'User ' . $user->nama_user . ' Melakukan verifikasi pada pengajuan ' . $pengajuan->perihal_pengajuan,
-                    );
                     $data = array('status' => 2);
                     $this->model_pengajuan_detail->edit(array('id_pengajuan_detail' => $detail->id_pengajuan_detail), $data);
-                    $this->model_log->insert($log);
 
                     $allDetail = $this->model_pengajuan_detail->getBy(array('id_pengajuan' => $detail->id_pengajuan))->result();
                     $countAll = count($allDetail);
@@ -146,12 +163,28 @@ class Frontend extends CI_Controller
                         $arr = array('nama_file_verified_pengajuan' => $hasil['filename'], 'qr_pengajuan' => $hasil['name_qr'], 'status_pengajuan' => 2);
                         $this->model_pengajuan->edit(array('id_pengajuan' => $pengajuan->id_pengajuan), $arr);
                     }
+                    $log = array(
+                        'id_user_log' => $user->id_user,
+                        'nama_aktor_log' => $user->nama_user,
+                        'aksi_log' => 'User ' . $user->nama_user . ' Melakukan verifikasi Tanda Tangan pada pengajuan ' . $pengajuan->perihal_pengajuan . ' dan tanda tangan ter VERIFIED',
+                        'kegiatan_log' => 'verify',
+                        'status_log' => 1
+                    );
+                    $this->model_log->insert($log);
 
                     $output['status'] = 200;
                     $output['nama_pengesah'] = $pengesah->nama_user;
                     $output['perihal_pengajuan'] = $pengajuan->perihal_pengajuan;
                     $output['verify'] = 'verified';
                 } else {
+                    $log = array(
+                        'id_user_log' => $user->id_user,
+                        'nama_aktor_log' => $user->nama_user,
+                        'aksi_log' => 'User ' . $user->nama_user . ' Melakukan verifikasi Tanda Tangan pada pengajuan ' . $pengajuan->perihal_pengajuan . ' dan tanda tangan INVALID',
+                        'kegiatan_log' => 'verify',
+                        'status_log' => 0
+                    );
+                    $this->model_log->insert($log);
                     $output['status'] = 500;
                     $output['verify'] = 'invalid';
                 }
