@@ -149,6 +149,7 @@ class Frontend extends CI_Controller
 
                     $output['status'] = 200;
                     $output['nama_pengesah'] = $pengesah->nama_user;
+                    $output['perihal_pengajuan'] = $pengajuan->perihal_pengajuan;
                     $output['verify'] = 'verified';
                 } else {
                     $output['status'] = 500;
