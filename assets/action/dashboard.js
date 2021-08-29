@@ -1,3 +1,3 @@
 $(function(){
-    $('#dashboard-page').addClass('active');
+    $('#dashboard-page').addClass('active bg-success');
 })

@@ -1,5 +1,5 @@
 $(function(){
-    $('#profilMhs-page').addClass('active');
+    $('#profilMhs-page').addClass('active bg-success');
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',

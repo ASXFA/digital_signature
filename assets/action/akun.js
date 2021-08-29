@@ -4,7 +4,7 @@ $(function(){
     //     // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     // }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
-    $('#akun-page').attr('class','nav-link active');
+    $('#akun-page').attr('class','nav-link active bg-success');
 
     // const Toast = Swal.mixin({
     //     toast: true,

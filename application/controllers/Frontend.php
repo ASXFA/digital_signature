@@ -114,6 +114,7 @@ class Frontend extends CI_Controller
             $user = $this->model_user->getBy(array('id_user' => $id_user))->row();
             $akun = $this->model_akun->getBy(array('id_user_akun' => $id_user))->row();
             $detail = $this->model_pengajuan_detail->getBy(array('digital_signature' => $signature))->row();
+            $pengesah = $this->model_user->getBy(array('id_user' => $detail->id_pengesah))->row();
             $pengajuan = $this->model_pengajuan->getBy(array('id_pengajuan' => $detail->id_pengajuan))->row();
             if (!empty($detail)) {
                 $key = PublicKeyLoader::loadPrivateKey(file_get_contents('./assets/file/key/' . $pengajuan->private_key_pengajuan), $password = false);
@@ -147,6 +148,7 @@ class Frontend extends CI_Controller
                     }
 
                     $output['status'] = 200;
+                    $output['nama_pengesah'] = $pengesah->nama_user;
                     $output['verify'] = 'verified';
                 } else {
                     $output['status'] = 500;

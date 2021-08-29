@@ -109,7 +109,9 @@
                                 <label for="" class="form-control-label">Level Akun</label>
                                 <select name="level_akun" id="level_akun" class="form-control" required>
                                     {% for item in level %}
+                                    {% if item.id_level != 3 %}
                                     <option value="{{item.id_level}}">{{item.nama_level}}</option>
+                                    {% endif %}
                                     {% endfor %}
                                 </select>
                             </div>
