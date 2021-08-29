@@ -166,7 +166,7 @@ class Frontend extends CI_Controller
                     $log = array(
                         'id_user_log' => $user->id_user,
                         'nama_aktor_log' => $user->nama_user,
-                        'aksi_log' => 'User ' . $user->nama_user . ' Melakukan verifikasi Tanda Tangan pada pengajuan ' . $pengajuan->perihal_pengajuan . ' dan tanda tangan ter VERIFIED',
+                        'aksi_log' => 'Verifikiasi tanda tangan ' . $pengesah . ' perihal ' . $pengajuan->perihal_pengajuan,
                         'kegiatan_log' => 'verify',
                         'status_log' => 1
                     );
@@ -180,7 +180,7 @@ class Frontend extends CI_Controller
                     $log = array(
                         'id_user_log' => $user->id_user,
                         'nama_aktor_log' => $user->nama_user,
-                        'aksi_log' => 'User ' . $user->nama_user . ' Melakukan verifikasi Tanda Tangan pada pengajuan ' . $pengajuan->perihal_pengajuan . ' dan tanda tangan INVALID',
+                        'aksi_log' => 'Verifikiasi tanda tangan ' . $pengesah . ' perihal ' . $pengajuan->perihal_pengajuan,
                         'kegiatan_log' => 'verify',
                         'status_log' => 0
                     );
