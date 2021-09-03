@@ -166,7 +166,7 @@ class Frontend extends CI_Controller
                     $log = array(
                         'id_user_log' => $user->id_user,
                         'nama_aktor_log' => $user->nama_user,
-                        'aksi_log' => 'Verifikiasi tanda tangan ' . $pengesah . ' perihal ' . $pengajuan->perihal_pengajuan,
+                        'aksi_log' => 'Verifikiasi tanda tangan ' . $pengesah->nama_user . ' perihal ' . $pengajuan->perihal_pengajuan,
                         'kegiatan_log' => 'verify',
                         'status_log' => 1
                     );

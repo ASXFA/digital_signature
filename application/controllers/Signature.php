@@ -91,7 +91,7 @@ class Signature extends CI_Controller
         $image_name = sha1($this->id_user) . '.png';
 
         $params['data'] = $sign;
-        $params['level'] = 'H';
+        $params['level'] = 'M';
         $params['size'] = 10;
         $params['savename'] = FCPATH . $config['imagedir'] . $image_name;
         $this->ciqrcode->generate($params);
