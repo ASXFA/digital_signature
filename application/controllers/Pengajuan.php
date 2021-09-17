@@ -35,7 +35,7 @@ class Pengajuan extends CI_Controller
         );
 
         $this->load->model('model_user');
-        $this->load->model('model_mhs');
+        // $this->load->model('model_mhs');
 
         $aktor = array();
 

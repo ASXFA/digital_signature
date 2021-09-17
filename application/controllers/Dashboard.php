@@ -27,7 +27,7 @@ class Dashboard extends CI_Controller
         );
 
         $this->load->model('model_user');
-        $this->load->model('model_mhs');
+        // $this->load->model('model_mhs');
 
         $aktor = array();
 
@@ -46,7 +46,7 @@ class Dashboard extends CI_Controller
         // }
         $this->load->model('model_pengajuan');
         $this->load->model('model_user');
-        $this->load->model('model_mhs');
+        // $this->load->model('model_mhs');
     }
 
     public function dashboard()
