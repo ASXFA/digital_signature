@@ -4,16 +4,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Model_pengajuan extends CI_Model
 {
     var $table = 'tbl_pengajuan';
-    var $select_column = array('id_pengajuan', 'id_mhs_pengajuan', 'id_mhs', 'nama_mhs', 'npm_mhs', 'prodi_mhs', 'perihal_pengajuan', 'deskripsi_pengajuan', 'tanggal_pengajuan', 'private_key_pengajuan', 'nama_file_pengajuan', 'nama_file_verified_pengajuan', 'pesan_pengajuan', 'status_pengajuan', 'tbl_pengajuan.created_at', 'tbl_pengajuan.created_by', 'tbl_pengajuan.updated_at', 'tbl_pengajuan.updated_by', 'tbl_pengajuan.deleted_at', 'tbl_pengajuan.deleted_by');
+    var $select_column = array('id_pengajuan', 'id_mhs_pengajuan', 'id_user', 'nama_user', 'prodi_user', 'perihal_pengajuan', 'deskripsi_pengajuan', 'tanggal_pengajuan', 'private_key_pengajuan', 'nama_file_pengajuan', 'nama_file_verified_pengajuan', 'pesan_pengajuan', 'status_pengajuan', 'tbl_pengajuan.created_at', 'tbl_pengajuan.created_by', 'tbl_pengajuan.updated_at', 'tbl_pengajuan.updated_by', 'tbl_pengajuan.deleted_at', 'tbl_pengajuan.deleted_by');
     var $order_column = array(null, 'id_pengajuan', 'id_mhs_pengajuan', 'perihal_pengajuan', 'deskripsi_pengajuan', 'tanggal_pengajuan', 'nama_file_pengajuan', 'status_pengajuan', 'tbl_pengajuan.created_at', 'tbl_pengajuan.created_by', 'tbl_pengajuan.updated_at', 'tbl_pengajuan.updated_by', 'tbl_pengajuan.deleted_at', 'tbl_pengajuan.deleted_by', null);
 
     function make_query()
     {
         $this->db->select($this->select_column);
         $this->db->from($this->table);
-        $this->db->join('tbl_mhs', 'tbl_mhs.id_mhs = tbl_pengajuan.id_mhs_pengajuan', 'left');
+        $this->db->join('tbl_user', 'tbl_user.id_user = tbl_pengajuan.id_mhs_pengajuan', 'left');
         if (isset($_POST['search']['value'])) {
-            $this->db->or_like('nama_mhs', $_POST['search']['value']);
+            $this->db->or_like('nama_user', $_POST['search']['value']);
             $this->db->or_like('perihal_pengajuan', $_POST['search']['value']);
             $this->db->or_like('tanggal_pengajuan', $_POST['search']['value']);
             $this->db->or_like('nama_file_pengajuan', $_POST['search']['value']);
@@ -59,7 +59,7 @@ class Model_pengajuan extends CI_Model
     {
         $this->db->select($this->select_column);
         $this->db->from($this->table);
-        $this->db->join('tbl_mhs', "tbl_mhs.id_mhs = $this->table.id_mhs_pengajuan", 'left');
+        $this->db->join('tbl_user', "tbl_user.id_user = $this->table.id_mhs_pengajuan", 'left');
         $this->db->where($where);
         $query = $this->db->get();
         return $query;

@@ -95,17 +95,71 @@ $(function(){
         $('#email_akun').removeClass('is-valid');
         $('#email_akun').removeClass('is-invalid');
         $('#form-btn').val('Tambah');
-        // kosongkan Field
+        // kosongkan Field dan disable
         $('#nama_user').val('');
+        $('#nama_user').attr('disabled','disabled');
         $('#nip_user').val('');
+        $('#nip_user').attr('disabled','disabled');
         $('#jabatan_user').val('');
+        $('#jabatan_user').attr('disabled','disabled');
         $('#no_hp_user').val(''); 
+        $('#no_hp_user').attr('disabled','disabled'); 
         $('#email_akun').val(''); 
-        $('#level_akun')[0].selectedIndex; 
-
+        $('#email_akun').attr('disabled','disabled'); 
+        $('#prodi_user').val(''); 
+        $('#prodi_user').attr('disabled','disabled'); 
+        var selectLevel = $('#level_akun').val();
+        if (selectLevel == 1 && selectLevel == 2) {
+            $('#nama_user').removeAttr('disabled','disabled');
+            $('#nip_user').val('');
+            $('#nip_user').removeAttr('readonly','readonly');
+            $('#nip_user').removeAttr('disabled','disabled');
+            $('#jabatan_user').removeAttr('disabled','disabled');
+            $('#no_hp_user').removeAttr('disabled','disabled');
+            $('#email_akun').removeAttr('disabled','disabled');
+            $('#prodi_user').val('-');
+            $('#prodi_user').removeAttr('disabled','disabled');
+            $('#prodi_user').attr('readonly','readonly');
+        }else if(selectLevel == 3){
+            $('#nama_user').removeAttr('disabled','disabled');
+            $('#nip_user').removeAttr('disabled','disabled');
+            $('#nip_user').val('-');
+            $('#nip_user').attr('readonly','readonly');
+            $('#jabatan_user').removeAttr('disabled','disabled');
+            $('#no_hp_user').removeAttr('disabled','disabled');
+            $('#email_akun').removeAttr('disabled','disabled');
+            $('#prodi_user').removeAttr('disabled','disabled');
+        }
+        
         $('#operation').val('Tambah');
     })
-
+    
+    $('#level_akun').change(function(){
+        var selectLevel = $('#level_akun').val();
+        if (selectLevel != 3) {
+            $('#nama_user').removeAttr('disabled','disabled');
+            $('#nip_user').val('');
+            $('#nip_user').removeAttr('readonly','readonly');
+            $('#nip_user').removeAttr('disabled','disabled');
+            $('#jabatan_user').removeAttr('disabled','disabled');
+            $('#no_hp_user').removeAttr('disabled','disabled');
+            $('#email_akun').removeAttr('disabled','disabled');
+            $('#prodi_user').val('-');
+            $('#prodi_user').removeAttr('disabled','disabled');
+            $('#prodi_user').attr('readonly','readonly');
+        }else if(selectLevel == 3){
+            $('#nama_user').removeAttr('disabled','disabled');
+            $('#nip_user').removeAttr('disabled','disabled');
+            $('#nip_user').val('-');
+            $('#nip_user').attr('readonly','readonly');
+            $('#jabatan_user').removeAttr('disabled','disabled');
+            $('#no_hp_user').removeAttr('disabled','disabled');
+            $('#email_akun').removeAttr('disabled','disabled');
+            $('#prodi_user').val('');
+            $('#prodi_user').removeAttr('disabled','disabled');
+            $('#prodi_user').removeAttr('readonly','readonly');
+        }
+    })
     $('#form-modal').submit(function(e){
         e.preventDefault();
         var nama_user = $('#nama_user').val();
@@ -178,6 +232,12 @@ $(function(){
                 html += '<td> Jabatan </td>';
                 html += '<td> : </td>';
                 html += '<td>'+result.jabatan_user+'</td>';
+                html += '</tr>';
+                html += '</tr>';
+                html += '<tr>';
+                html += '<td> Prodi </td>';
+                html += '<td> : </td>';
+                html += '<td>'+result.prodi_user+'</td>';
                 html += '</tr>';
                 html += '<tr>';
                 html += '<td> No Hp </td>';

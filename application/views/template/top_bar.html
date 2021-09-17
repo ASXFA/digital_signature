@@ -155,14 +155,14 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="{{base_url}}listMhs" class="nav-link" id="mhs-page">
                         <i class="nav-icon fas fa-user-circle"></i>
                         <p>
                             Mahasiswa
                         </p>
                     </a>
-                </li>
+                </li> -->
                 <!-- <li class="nav-item">
                     <a href="{{base_url}}assets/#" class="nav-link">
                         <i class="nav-icon far fa-plus-square"></i>
@@ -196,7 +196,6 @@
                     </a>
                 </li>
                 <li class="nav-header">PENGATURAN AKUN</li>
-                {% if level_akun_login != 3 %}
                 <li class="nav-item">
                     <a href="{{base_url}}profilUser" class="nav-link" id="profilUser-page">
                         <i class="nav-icon fas fa-user"></i>
@@ -205,16 +204,6 @@
                         </p>
                     </a>
                 </li>
-                {% else %}
-                <li class="nav-item">
-                    <a href="{{base_url}}profilMhs" class="nav-link" id="profilMhs-page">
-                        <i class="nav-icon fas fa-user"></i>
-                        <p>
-                            Profil Saya
-                        </p>
-                    </a>
-                </li>
-                {% endif %}
                 <li class="nav-item">
                     <a href="{{base_url}}logout" class="nav-link">
                         <i class="nav-icon fa fa-map-signs"></i>

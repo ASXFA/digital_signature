@@ -79,7 +79,7 @@
                                     <td>File yang sudah ditanda tangan </td>
                                     <td>:</td>
                                     <td>
-                                        {% if pengajuan.nama_file_verified_pengajuan == NULL %}
+                                        {% if pengajuan.nama_file_verified_pengajuan == "-" %}
                                         -
                                         {% else %}
                                         <a href="{{base_url}}assets/file/dokumen_akhir/{{pengajuan.nama_file_verified_pengajuan}}"
@@ -91,13 +91,10 @@
                                 <tr>
                                     <td>Mahasiswa </td>
                                     <td>:</td>
-                                    <td>{{pengajuan.nama_mhs}}</td>
-                                    <td>NPM</td>
-                                    <td>:</td>
-                                    <td>{{pengajuan.npm_mhs}}</td>
+                                    <td>{{pengajuan.nama_user}}</td>
                                     <td>Prodi</td>
                                     <td>:</td>
-                                    <td>{{pengajuan.prodi_mhs}}</td>
+                                    <td>{{ pengajuan.prodi_user }}</td>
                                 </tr>
                                 <tr>
                                     <td>Deskripsi</td>
@@ -160,12 +157,12 @@
                                             <button class="btn btn-primary btn-sm sign" id="{{item.id_pengajuan}}">
                                                 Tanda
                                                 Tangani Sekarang</button>
+                                            {% elseif item.status == 1 or item.status == 2 %}
+                                            <span class="badge badge-success p-2"> Sudah ditanda tangan </span>
                                             {% elseif item.id_pengesah != id_user_akun_login and item.status == 0 %}
                                             <span class="badge badge-secondary p-2"> - </span>
                                             {% elseif pengajuan.status_pengajuan == 0 or pengajuan.status_pengajuan == 3 %}
                                             <span class="badge badge-secondary p-2"> - </span>
-                                            {% elseif item.status == 1 or item.status == 2 %}
-                                            <span class="badge badge-success p-2"> Sudah ditanda tangan </span>
                                             {% endif %}
                                         </td>
                                         {% endif %}

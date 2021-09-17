@@ -19,8 +19,6 @@ class Pengajuan extends CI_Controller
         if ($this->isLogin == 0) {
             redirect(base_url());
         }
-        // set timezone 
-        date_default_timezone_set("Asia/Bangkok");
         $this->id = $this->session->userdata('id_akun_login');
         $this->id_user = $this->session->userdata('id_user_akun_login');
         $this->email = $this->session->userdata('email_akun_login');
@@ -42,17 +40,18 @@ class Pengajuan extends CI_Controller
         $aktor = array();
 
         // ambil data lengkap aktor login
-        if ($this->level != 3) {
-            $get = $this->model_user->getBy(array('id_user' => $this->id_user))->row();
-            $this->content['nama_akun_login'] = $get->nama_user;
-            $this->content['jabatan_akun_login'] = $get->jabatan_user;
-            $this->content['nomor_induk_akun_login'] = $get->nip_user;
-        } else if ($this->level == 3) {
-            $get = $this->model_mhs->getBy(array('id_mhs' => $this->id_user))->row();
-            $this->content['nama_akun_login'] = $get->nama_mhs;
-            $this->content['jabatan_akun_login'] = 'Mahasiswa';
-            $this->content['nomor_induk_akun_login'] = $get->npm_mhs;
-        }
+        // if ($this->level != 3) {
+        $get = $this->model_user->getBy(array('id_user' => $this->id_user))->row();
+        $this->content['nama_akun_login'] = $get->nama_user;
+        $this->content['jabatan_akun_login'] = $get->jabatan_user;
+        $this->content['nomor_induk_akun_login'] = $get->nip_user;
+        // }
+        //  else if ($this->level == 3) {
+        //     $get = $this->model_mhs->getBy(array('id_mhs' => $this->id_user))->row();
+        //     $this->content['nama_akun_login'] = $get->nama_mhs;
+        //     $this->content['jabatan_akun_login'] = 'Mahasiswa';
+        //     $this->content['nomor_induk_akun_login'] = $get->npm_mhs;
+        // }
 
         $this->load->model('model_akun');
         $this->load->model('model_pengajuan');
@@ -84,7 +83,7 @@ class Pengajuan extends CI_Controller
                         $sub_data[] = $no + 1;
                         // $sub_data[] = $row->id_pengajuan;
                         // $mhs = $this->model_mhs->getBy(array('id_mhs' => $row->id_mhs_pengajuan))->row();
-                        $sub_data[] = $row->nama_mhs;
+                        $sub_data[] = $row->nama_user;
                         $sub_data[] = $row->perihal_pengajuan;
                         $sub_data[] = "<a class='link-primary' target='_blank' href='" . base_url() . "assets/file/pengajuan/" . $row->nama_file_pengajuan . "'>" . $row->nama_file_pengajuan . "</a>";
                         $sub_data[] = date('d F Y H:i:sa', strtotime($row->tanggal_pengajuan));
@@ -122,7 +121,7 @@ class Pengajuan extends CI_Controller
                             $sub_data[] = $no + 1;
                             // $sub_data[] = $row->id_pengajuan;
                             // $mhs = $this->model_mhs->getBy(array('id_mhs' => $row->id_mhs_pengajuan))->row();
-                            $sub_data[] = $row->nama_mhs;
+                            $sub_data[] = $row->nama_user;
                             $sub_data[] = $row->perihal_pengajuan;
                             $sub_data[] = "<a class='link-primary' target='_blank' href='" . base_url() . "assets/file/pengajuan/" . $row->nama_file_pengajuan . "'>" . $row->nama_file_pengajuan . "</a>";
                             $sub_data[] = date('d F Y H:i:sa', strtotime($row->tanggal_pengajuan));
@@ -190,7 +189,7 @@ class Pengajuan extends CI_Controller
                         $sub_data[] = $no + 1;
                         // $sub_data[] = $row->id_pengajuan;
                         // $mhs = $this->model_mhs->getBy(array('id_mhs' => $row->id_mhs_pengajuan))->row();
-                        $sub_data[] = $row->nama_mhs;
+                        $sub_data[] = $row->nama_user;
                         $sub_data[] = $row->perihal_pengajuan;
                         $sub_data[] = "<a class='link-primary' target='_blank' href='" . base_url() . "assets/file/pengajuan/" . $row->nama_file_pengajuan . "'>" . $row->nama_file_pengajuan . "</a>";
                         $sub_data[] = date('d F Y H:i:sa', strtotime($row->tanggal_pengajuan));
@@ -269,9 +268,9 @@ class Pengajuan extends CI_Controller
             'deskripsi_pengajuan' => $pengajuan->deskripsi_pengajuan,
             'nama_file_pengajuan' => $pengajuan->nama_file_pengajuan,
             'pengesah' => $detail,
-            'nama_mhs' => $pengajuan->nama_mhs,
-            'prodi_mhs' => $pengajuan->prodi_mhs,
-            'npm_mhs' => $pengajuan->npm_mhs,
+            'nama_mhs' => $pengajuan->nama_user,
+            // 'prodi_mhs' => $pengajuan->prodi_mhs,
+            // 'npm_mhs' => $pengajuan->npm_mhs,
             'created_at' => $pengajuan->created_at,
             'created_by' => $pengajuan->created_by,
             'updated_at' => $pengajuan->updated_at,
@@ -326,6 +325,7 @@ class Pengajuan extends CI_Controller
                         'perihal_pengajuan' => $this->input->post('perihal_pengajuan'),
                         'deskripsi_pengajuan' => $this->input->post('deskripsi_pengajuan'),
                         'nama_file_pengajuan' => $nama_file,
+                        'nama_file_verified_pengajuan' => '-',
                         'private_key_pengajuan' => $filename,
                         'status_pengajuan' => 0,
                         'created_by' => $this->content['nama_akun_login']

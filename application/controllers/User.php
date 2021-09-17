@@ -11,8 +11,6 @@ class User extends CI_Controller
         if ($this->isLogin == 0) {
             redirect(base_url());
         }
-        // set timezone 
-        date_default_timezone_set("Asia/Bangkok");
         $this->id = $this->session->userdata('id_akun_login');
         $this->id_user = $this->session->userdata('id_user_akun_login');
         $this->email = $this->session->userdata('email_akun_login');
@@ -34,17 +32,18 @@ class User extends CI_Controller
         $aktor = array();
 
         // ambil data lengkap aktor login
-        if ($this->level != 3) {
-            $get = $this->model_user->getBy(array('id_user' => $this->id_user))->row();
-            $this->content['nama_akun_login'] = $get->nama_user;
-            $this->content['jabatan_akun_login'] = $get->jabatan_user;
-            $this->content['nomor_induk_akun_login'] = $get->nip_user;
-        } else if ($this->level == 3) {
-            $get = $this->model_mhs->getBy(array('id_mhs' => $this->id_user))->row();
-            $this->content['nama_akun_login'] = $get->nama_mhs;
-            $this->content['jabatan_akun_login'] = 'Mahasiswa';
-            $this->content['nomor_induk_akun_login'] = $get->npm_mhs;
-        }
+        // if ($this->level != 3) {
+        $get = $this->model_user->getBy(array('id_user' => $this->id_user))->row();
+        $this->content['nama_akun_login'] = $get->nama_user;
+        $this->content['jabatan_akun_login'] = $get->jabatan_user;
+        $this->content['nomor_induk_akun_login'] = $get->nip_user;
+        // }
+        //  else if ($this->level == 3) {
+        //     $get = $this->model_mhs->getBy(array('id_mhs' => $this->id_user))->row();
+        //     $this->content['nama_akun_login'] = $get->nama_mhs;
+        //     $this->content['jabatan_akun_login'] = 'Mahasiswa';
+        //     $this->content['nomor_induk_akun_login'] = $get->npm_mhs;
+        // }
 
         $this->load->model('model_log');
     }
@@ -124,6 +123,7 @@ class User extends CI_Controller
             'nama_user' => $user->nama_user,
             'jabatan_user' => $user->jabatan_user,
             'nip_user' => $user->nip_user,
+            'prodi_user' => $user->prodi_user,
             'no_hp_user' => $user->no_hp_user,
             'created_at' => $user->created_at,
             'created_by' => $user->created_by,
@@ -155,6 +155,7 @@ class User extends CI_Controller
                 'id_user' => $this->input->post('id_user'),
                 'nama_user' => $this->input->post('nama_user'),
                 'jabatan_user' => $this->input->post('jabatan_user'),
+                'prodi_user' => $this->input->post('prodi_user'),
                 'nip_user' => $this->input->post('nip_user'),
                 'no_hp_user' => $this->input->post('no_hp_user'),
                 'created_by' => $this->content['nama_akun_login']
@@ -190,6 +191,7 @@ class User extends CI_Controller
                 'nama_user' => $this->input->post('nama_user'),
                 'jabatan_user' => $this->input->post('jabatan_user'),
                 'nip_user' => $this->input->post('nip_user'),
+                'prodi_user' => $this->input->post('prodi_user'),
                 'no_hp_user' => $this->input->post('no_hp_user'),
                 'updated_at' => date('Y-m-d h:i:sa'),
                 'updated_by' => $this->content['nama_akun_login']

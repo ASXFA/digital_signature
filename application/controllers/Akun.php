@@ -32,17 +32,18 @@ class Akun extends CI_Controller
         $aktor = array();
 
         // ambil data lengkap aktor login
-        if ($this->level != 3) {
-            $get = $this->model_user->getBy(array('id_user' => $this->id_user))->row();
-            $this->content['nama_akun_login'] = $get->nama_user;
-            $this->content['jabatan_akun_login'] = $get->jabatan_user;
-            $this->content['nomor_induk_akun_login'] = $get->nip_user;
-        } else if ($this->level == 3) {
-            $get = $this->model_mhs->getBy(array('id_mhs' => $this->id_user))->row();
-            $this->content['nama_akun_login'] = $get->nama_mhs;
-            $this->content['jabatan_akun_login'] = 'Mahasiswa';
-            $this->content['nomor_induk_akun_login'] = $get->npm_mhs;
-        }
+        // if ($this->level != 3) {
+        $get = $this->model_user->getBy(array('id_user' => $this->id_user))->row();
+        $this->content['nama_akun_login'] = $get->nama_user;
+        $this->content['jabatan_akun_login'] = $get->jabatan_user;
+        $this->content['nomor_induk_akun_login'] = $get->nip_user;
+        // }
+        //  else if ($this->level == 3) {
+        //     $get = $this->model_mhs->getBy(array('id_mhs' => $this->id_user))->row();
+        //     $this->content['nama_akun_login'] = $get->nama_mhs;
+        //     $this->content['jabatan_akun_login'] = 'Mahasiswa';
+        //     $this->content['nomor_induk_akun_login'] = $get->npm_mhs;
+        // }
         $this->load->model('model_akun');
     }
 
