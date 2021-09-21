@@ -2,12 +2,18 @@
 
 // use phpseclib\Crypt\RSA;
 // use phpseclib\Crypt\PublicKeyLoader;
+
+// Fungsi untuk memanggil library PHPSECLIB enkripsi RSA dan SHA256
+// untuk dokumentasi bisa dicek di https://phpseclib.com/docs/publickeys
+
 use phpseclib3\Crypt\RSA;
 use phpseclib3\Crypt\RSA\Formats\Keys\PSS;
 use phpseclib3\Crypt\RSA\PrivateKey;
 use phpseclib3\Crypt\RSA\PublicKey;
 use phpseclib3\Crypt\PublicKeyLoader;
 use phpseclib3\Math\BigInteger;
+
+// Fungsi memanggil library FPDF dan FPDI
 
 use \setasign\Fpdf\Fpdf;
 use \setasign\Fpdi\Fpdi;
@@ -72,10 +78,13 @@ class Signature extends CI_Controller
         $id_pengajuan = $this->input->post('id');
         $pengajuan = $this->model_pengajuan->getBy(array('id_pengajuan' => $id_pengajuan))->row();
         $detail = $this->model_pengajuan_detail->getBy(array('id_pengajuan' => $id_pengajuan, 'id_pengesah' => $this->id_user))->row();
-        $key = PublicKeyLoader::loadPrivateKey(file_get_contents('./assets/file/key/' . $pengajuan->private_key_pengajuan), $password = false);
+        $key = PublicKeyLoader::loadPrivateKey(file_get_contents('./assets/file/key/' . $pengajuan->private_key_pengajuan), $password = false); //Melakukan fungsi load file key pada pengajuan tsb.
+
         // $key2 = PublicKeyLoader::load(file_get_contents('./assets/file/key/' . $pengajuan->public_key_pengajuan), $password = false);
-        $sign = base64_encode($key->sign($this->id_user . '_' . $id_pengajuan));
-        $this->load->library('ciqrcode');
+
+        $sign = base64_encode($key->sign($this->id_user . '_' . $id_pengajuan)); // Melakukan signature digital
+
+        $this->load->library('ciqrcode'); // Fungsi memangggil library QR CODE
 
         $config['cacheable']    = true; //boolean, the default is true
         $config['cachedir']     = './assets/'; //string, the default is application/cache/
@@ -93,7 +102,7 @@ class Signature extends CI_Controller
         $params['level'] = 'M';
         $params['size'] = 10;
         $params['savename'] = FCPATH . $config['imagedir'] . $image_name;
-        $this->ciqrcode->generate($params);
+        $this->ciqrcode->generate($params); // fungsi membuat QR CODE
 
         $data = array('digital_signature' => $sign, 'qr_code' => $image_name, 'status' => 1);
         $process = $this->model_pengajuan_detail->edit(array('id_pengajuan' => $id_pengajuan, 'id_pengesah' => $this->id_user), $data);

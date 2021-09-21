@@ -1,5 +1,8 @@
 <?php
 
+// Fungsi untuk memanggil library PHPSECLIB enkripsi RSA dan SHA256
+// untuk dokumentasi bisa dicek di https://phpseclib.com/docs/publickeys
+
 use phpseclib3\Crypt\RSA;
 use phpseclib3\Crypt\RSA\Formats\Keys\PKCS8;
 use phpseclib3\Crypt\RSA\PrivateKey;
@@ -306,11 +309,12 @@ class Pengajuan extends CI_Controller
             } else {
                 $file_ext = $this->upload->data('file_ext');
                 if ($file_ext == '.pdf') {
-                    // create Private Key
+
+                    // membuat Private Key menggunakan hash SHA256
                     $private = RSA::createKey()->withMGFHash('sha256');
                     $data = $private->toString('PSS');
                     $filename = sha1('private') . '.pem';
-                    $this->createFile($filename, $data);
+                    $this->createFile($filename, $data); // membuat file private key
 
                     // create Public key
                     // $public = $private->getPublicKey()->withMGFHash('sha256');

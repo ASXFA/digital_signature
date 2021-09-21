@@ -1,5 +1,8 @@
 <?php
 
+// Fungsi untuk memanggil library PHPSECLIB enkripsi RSA dan SHA256
+// untuk dokumentasi bisa dicek di https://phpseclib.com/docs/publickeys
+
 use phpseclib3\Crypt\RSA;
 use phpseclib3\Crypt\RSA\Formats\Keys\PSS;
 use phpseclib3\Crypt\RSA\PrivateKey;
@@ -139,10 +142,10 @@ class Frontend extends CI_Controller
             $pengesah = $this->model_user->getBy(array('id_user' => $detail->id_pengesah))->row();
             $pengajuan = $this->model_pengajuan->getBy(array('id_pengajuan' => $detail->id_pengajuan))->row();
             if (!empty($detail)) {
-                $key = PublicKeyLoader::loadPrivateKey(file_get_contents('./assets/file/key/' . $pengajuan->private_key_pengajuan), $password = false);
-                $key2 = $key->getPublicKey();
+                $key = PublicKeyLoader::loadPrivateKey(file_get_contents('./assets/file/key/' . $pengajuan->private_key_pengajuan), $password = false); // memanggil file private key pada pengajuan tsb
+                $key2 = $key->getPublicKey(); // generate public key pada private key yang telah dipanggil
 
-                $decodeSign = base64_decode($signature);
+                $decodeSign = base64_decode($signature); // crypt url agar bisa dibaca melalui parameter
                 $verify = $key2->verify($detail->id_pengesah . '_' . $detail->id_pengajuan, $decodeSign);
                 if ($verify == 1) {
                     $data = array('status' => 2);
@@ -199,7 +202,7 @@ class Frontend extends CI_Controller
     public function creatingVerifiedFile($id_pengajuan, $nama_file)
     {
         $crypt = base_url() . 'frontend/cekDokumen/' . urlencode(base64_encode($id_pengajuan));
-        $this->load->library('ciqrcode');
+        $this->load->library('ciqrcode'); // load library QR CODE
 
         $config['cacheable']    = true; //boolean, the default is true
         $config['cachedir']     = './assets/'; //string, the default is application/cache/
@@ -217,19 +220,19 @@ class Frontend extends CI_Controller
         $params['level'] = 'H';
         $params['size'] = 10;
         $params['savename'] = FCPATH . $config['imagedir'] . $image_name;
-        $this->ciqrcode->generate($params);
+        $this->ciqrcode->generate($params); // membuat QR CODE
 
-        // initiate FPDI
+        // inisialisasi FPDI
         $pdf = new Fpdi();
-        // add a page
+        // menambahkan page baru
         $pdf->AddPage();
-        // set the source file
+        // atur file dan panggil file pdf pengajuan
         $pageCount = $pdf->setSourceFile(FCPATH . "./assets/file/pengajuan/" . $nama_file);
         for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
-            // import a page
+            // import halaman
             $templateId = $pdf->importPage($pageNo);
 
-            // use the imported page and adjust the page size
+            // gunakan halaman yang tadi dan atur halaman
             $pdf->useTemplate($templateId, ['adjustPageSize' => true]);
             $pdf->AddPage();
         }
