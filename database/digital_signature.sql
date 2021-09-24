@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 17, 2021 at 12:12 PM
+-- Generation Time: Sep 24, 2021 at 11:43 PM
 -- Server version: 8.0.25
--- PHP Version: 7.4.23
+-- PHP Version: 7.2.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -228,7 +228,8 @@ INSERT INTO `tbl_log` (`id_log`, `id_user_log`, `nama_aktor_log`, `aksi_log`, `k
 (139, '', 'TEST', 'Menambahkan User dengan ID USR0003dan Akunnya ', '', 0, '2021-09-17 12:04:23'),
 (140, '', 'LKM1', 'Mahasiswa denga ID USR0003 Mengajukan berkas dengan perihal Contoh pengajuan', '', 0, '2021-09-17 12:07:27'),
 (141, '', 'Pengesah1', 'User Pengesah1 Melakukan Tanda Tangan pada pengajuan Contoh pengajuan', '', 0, '2021-09-17 12:08:51'),
-(142, '', 'TEST', 'User dengan ID USR0001 MENERIMA pengajuan dengan perihal Contoh pengajuan', '', 0, '2021-09-17 12:09:39');
+(142, '', 'TEST', 'User dengan ID USR0001 MENERIMA pengajuan dengan perihal Contoh pengajuan', '', 0, '2021-09-17 12:09:39'),
+(143, 'USR0001', 'TEST', 'Verifikiasi tanda tangan Pengesah1 perihal Contoh pengajuan', 'verify', 1, '2021-09-24 23:19:02');
 
 -- --------------------------------------------------------
 
@@ -379,7 +380,7 @@ ALTER TABLE `tbl_level`
 -- AUTO_INCREMENT for table `tbl_log`
 --
 ALTER TABLE `tbl_log`
-  MODIFY `id_log` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+  MODIFY `id_log` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
 -- AUTO_INCREMENT for table `tbl_pengajuan`
