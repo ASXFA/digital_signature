@@ -73,10 +73,10 @@ class Akun extends CI_Controller
                 <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-ellipsis-h"></i>
                 </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item detail" id="' . $row->id_akun . '" href="#"><i class="fas fa-eye"></i> Detail</a>
-                </div>
-              </div>';
+                </div>';
+                    // <div class="dropdown-menu">
+                    //     <a class="dropdown-item detail" id="' . $row->id_akun . '" href="#"><i class="fas fa-eye"></i> Detail</a>
+                    // </div>
                     $data[] = $sub_data;
                     $no++;
                 }
